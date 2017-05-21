@@ -14,7 +14,7 @@ export default class Scene extends React.Component {
   }
 
   componentDidMount() {
-    const camera = new Camera(this.canvasContext, this.props.resolution, this.props.focalLength, this.props.range)
+    const camera = new Camera(this.canvasContext, this.props.resolution, this.props.focalLength, this.props.range, window.innerHeight, window.innerWidth)
     this.game = new Game(camera, this.props.player, this.props.map)
   }
 
