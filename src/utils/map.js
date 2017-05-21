@@ -8,7 +8,7 @@ export default function Map(size) {
 Map.prototype.update = function (seconds) {
 }
 
-Map.prototype.randomize = function  () {
+Map.prototype.randomize = function () {
   for (let i = 0; i < this.size * this.size; i++) {
     this.wallGrid[i] = Math.random() < 0.3 ? 1 : 0
   }
