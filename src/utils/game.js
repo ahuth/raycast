@@ -2,6 +2,7 @@ export default function Game(camera, player, map) {
   this.camera = camera
   this.player = player
   this.map = map
+  map.randomize()
 }
 
 Game.prototype.update = function (seconds) {
