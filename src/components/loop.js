@@ -8,6 +8,7 @@ export default class Loop extends React.Component {
     this.unsubscribe = this.unsubscribe.bind(this)
     this.tick = this.tick.bind(this)
     this.subscriptions = []
+    this.previousTime = Date.now()
   }
 
   componentWillMount() {
@@ -36,7 +37,9 @@ export default class Loop extends React.Component {
   }
 
   tick(timestamp) {
-    this.subscriptions.forEach(subscription => subscription(timestamp))
+    const seconds = (timestamp - this.previousTime) / 1000
+    this.previousTime = timestamp
+    this.subscriptions.forEach(subscription => subscription(seconds))
     this.request = window.requestAnimationFrame(this.tick)
   }
 

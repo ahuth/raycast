@@ -6,7 +6,6 @@ export default class Scene extends React.Component {
   constructor() {
     super()
     this.update = this.update.bind(this)
-    this.state = {}
   }
 
   componentWillMount() {
@@ -21,7 +20,7 @@ export default class Scene extends React.Component {
     this.context.loop.unsubscribe(this.update)
   }
 
-  update(timestamp) {
+  update(seconds) {
   }
 
   render() {
