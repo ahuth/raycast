@@ -3,3 +3,6 @@ export default function Camera(canvasContext, resolution, focalLength) {
   this.resolution = resolution
   this.focalLength = focalLength
 }
+
+Camera.prototype.render = function (map, player) {
+}

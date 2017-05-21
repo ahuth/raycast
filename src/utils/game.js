@@ -4,4 +4,8 @@ export default function Game(camera, player, map) {
   this.map = map
 }
 
-Game.prototype.update = function (seconds) {}
+Game.prototype.update = function (seconds) {
+  this.map.update(seconds)
+  this.player.update(this.map, seconds)
+  this.camera.render(this.map, this.player)
+}

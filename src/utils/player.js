@@ -10,3 +10,6 @@ Player.prototype.walk = function (distance, map) {
   this.x += dx
   this.y += dy
 }
+
+Player.prototype.update = function (map, seconds) {
+}
