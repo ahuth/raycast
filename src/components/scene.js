@@ -30,8 +30,6 @@ export default class Scene extends React.Component {
   render() {
     return (
       <canvas
-        width="1"
-        height="1"
         style={{height: "100%", width: "100%"}}
         ref={(canvas) => { this.canvasContext = canvas.getContext("2d") }}
       >
