@@ -1,5 +1,6 @@
 import PropTypes from "prop-types"
 import React from "react"
+import Camera from "../utils/camera"
 
 export default class Scene extends React.Component {
   constructor() {
@@ -10,6 +11,10 @@ export default class Scene extends React.Component {
 
   componentWillMount() {
     this.context.loop.subscribe(this.update)
+  }
+
+  componentDidMount() {
+    this.camera = new Camera(this.canvasContext, this.props.resolution, this.props.focalLength)
   }
 
   componentWillUnmount() {
