@@ -1,7 +1,8 @@
 /* eslint-disable no-extend-native */
 
-export default function Map(size) {
+export default function Map(size, height) {
   this.size = size
+  this.height = height
   this.grid = new Array(size).fill(new Array(size).fill(0))
 }
 
