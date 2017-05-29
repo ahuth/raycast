@@ -8,9 +8,6 @@ export default function App() {
   return (
     <Loop>
       <Scene
-        resolution={320}
-        focalLength={0.8}
-        range={14}
         map={new Map(32)}
         player={new Player(15.3, -1.2, Math.PI * 0.3)}
       />
