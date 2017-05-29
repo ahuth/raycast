@@ -8,7 +8,7 @@ export default function App() {
   return (
     <Loop>
       <Scene
-        map={new Map(32)}
+        map={new Map(32).randomize()}
         player={new Player(15.3, -1.2, Math.PI * 0.3)}
       />
     </Loop>
