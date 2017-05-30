@@ -17,12 +17,11 @@ Player.prototype.castRays = function (map, fov, resolution) {
   const startAngle = this.direction - fov / 2
   // Generate the angle for each ray starting from the left and sweeping to the right screen edge.
   const rayAngles = new Array(resolution).fill(0).map((_, index) => startAngle + index * angleBetweenRays)
-  // Calculate where each ray intersects a wall.
-  const rays = rayAngles.map(angle => this.castRay(map, angle))
-  return rays
+  // Calculate the distance from each ray to the nearest wall.
+  return rayAngles.map(angle => this.castRay(map, angle))
 }
 
-// Determine where a single ray from the player's position intersects with the nearest wall.
+// Determine the distance a single ray travels before intersecting a wall.
 Player.prototype.castRay = function (map, angle) {
   return 0
 }
