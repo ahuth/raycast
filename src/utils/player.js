@@ -36,5 +36,5 @@ Player.prototype.castRay = function (map, rawAngle) {
   const intersectionX = this.x + (this.y - intersectionY) / Math.tan(angle)
   const intersection = new Point(intersectionX, intersectionY)
   const gridCoordinates = intersection.toGrid(map.height)
-  return gridCoordinates
+  return map.isWall(gridCoordinates)
 }

@@ -14,3 +14,11 @@ Map.prototype.randomize = function () {
   }
   return this
 }
+
+Map.prototype.isWall = function (point) {
+  return this.isWithinBounds(point) && this.grid[point.x][point.y] === 1
+}
+
+Map.prototype.isWithinBounds = function (point) {
+  return point.x >= 0 && point.x < this.size && point.y >=0 && point.y < this.size
+}
