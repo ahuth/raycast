@@ -1,3 +1,5 @@
+import {normalize as normalizeRadians, twoPi} from "./radians"
+
 export default function Player(x, y, height, direction) {
   this.x = x
   this.y = y
@@ -24,9 +26,7 @@ Player.prototype.castRays = function (map, fov, resolution) {
 // Determine the distance a single ray travels before intersecting a wall.
 Player.prototype.castRay = function (map, rawAngle) {
   // Ensure that the angle is between 0 and 360 degrees.
-  const twoPi = 2 * Math.PI
-  const newAngle = rawAngle % twoPi
-  const angle = newAngle < 0 ? newAngle + twoPi : newAngle
+  const angle = normalizeRadians(rawAngle)
   // Determine if the ray is travelling up/down and left/right.
   const up = angle > 0 && angle < Math.PI
   const right = angle < (twoPi * 0.25) || angle > (twoPi * 0.75)
