@@ -22,6 +22,24 @@ Player.prototype.castRays = function (map, fov, resolution) {
 }
 
 // Determine the distance a single ray travels before intersecting a wall.
-Player.prototype.castRay = function (map, angle) {
-  return 0
+Player.prototype.castRay = function (map, rawAngle) {
+  // Ensure that the angle is between 0 and 360 degrees.
+  const twoPi = 2 * Math.PI
+  const newAngle = rawAngle % twoPi
+  const angle = newAngle < 0 ? newAngle + twoPi : newAngle
+  // Determine if the ray is travelling up/down and left/right.
+  const up = angle > 0 && angle < Math.PI
+  const right = angle < (twoPi * 0.25) || angle > (twoPi * 0.75)
+  // Calculate the Y coordinate of the first horizontal intersection with a grid boundary.
+  let intersectionY
+  if (up) {
+    intersectionY = Math.floor(this.y / map.height) * 64 - 1
+  } else {
+    intersectionY = Math.floor(this.y / map.height) * 64 + 64
+  }
+  // Calculate the X coordinate of the first horizontal intersection.
+  let intersectionX = this.x + (this.y - intersectionY) / Math.tan(angle)
+  // Convert the unit coordinates to grid coordinates.
+  const gridCoordinates = {x: Math.floor(intersectionX / map.height), y: Math.floor(intersectionY / map.height)}
+  return gridCoordinates
 }
