@@ -31,12 +31,7 @@ Player.prototype.castRay = function (map, rawAngle) {
   const up = angle > 0 && angle < Math.PI
   const right = angle < (twoPi * 0.25) || angle > (twoPi * 0.75)
   // Calculate the Y coordinate of the first horizontal intersection with a grid boundary.
-  let intersectionY
-  if (up) {
-    intersectionY = Math.floor(this.y / map.height) * 64 - 1
-  } else {
-    intersectionY = Math.floor(this.y / map.height) * 64 + 64
-  }
+  let intersectionY = Math.floor(this.y / map.height) * map.height + (up ? -1 : map.height)
   // Calculate the X coordinate of the first horizontal intersection.
   let intersectionX = this.x + (this.y - intersectionY) / Math.tan(angle)
   // Convert the unit coordinates to grid coordinates.
