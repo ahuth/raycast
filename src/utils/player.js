@@ -1,3 +1,4 @@
+import Point from "./point"
 import {normalize as normalizeRadians, twoPi} from "./radians"
 
 export default function Player(x, y, height, direction) {
@@ -31,9 +32,9 @@ Player.prototype.castRay = function (map, rawAngle) {
   const up = angle > 0 && angle < Math.PI
   const right = angle < (twoPi * 0.25) || angle > (twoPi * 0.75)
   // Calculate the coordinates of the first horizontal intersection with a grid boundary.
-  let intersectionY = Math.floor(this.y / map.height) * map.height + (up ? -1 : map.height)
-  let intersectionX = this.x + (this.y - intersectionY) / Math.tan(angle)
-  // Convert the intersection's unit coordinates to grid coordinates.
-  const gridCoordinates = {x: Math.floor(intersectionX / map.height), y: Math.floor(intersectionY / map.height)}
+  const intersectionY = Math.floor(this.y / map.height) * map.height + (up ? -1 : map.height)
+  const intersectionX = this.x + (this.y - intersectionY) / Math.tan(angle)
+  const intersection = new Point(intersectionX, intersectionY)
+  const gridCoordinates = intersection.toGrid(map.height)
   return gridCoordinates
 }
