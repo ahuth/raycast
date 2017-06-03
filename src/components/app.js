@@ -12,7 +12,7 @@ export default function App() {
         resolution={320}
         fov={degreesToRadians(60)}
         map={new Map(32, 64).randomize()}
-        player={new Player(15.3, -1.2, 32, degreesToRadians(54))}
+        player={new Player(1024, 1024, 32, degreesToRadians(54))}
       />
     </Loop>
   )
