@@ -30,11 +30,10 @@ Player.prototype.castRay = function (map, rawAngle) {
   // Determine if the ray is travelling up/down and left/right.
   const up = angle > 0 && angle < Math.PI
   const right = angle < (twoPi * 0.25) || angle > (twoPi * 0.75)
-  // Calculate the Y coordinate of the first horizontal intersection with a grid boundary.
+  // Calculate the coordinates of the first horizontal intersection with a grid boundary.
   let intersectionY = Math.floor(this.y / map.height) * map.height + (up ? -1 : map.height)
-  // Calculate the X coordinate of the first horizontal intersection.
   let intersectionX = this.x + (this.y - intersectionY) / Math.tan(angle)
-  // Convert the unit coordinates to grid coordinates.
+  // Convert the intersection's unit coordinates to grid coordinates.
   const gridCoordinates = {x: Math.floor(intersectionX / map.height), y: Math.floor(intersectionY / map.height)}
   return gridCoordinates
 }
