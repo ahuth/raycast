@@ -83,7 +83,7 @@ Player.prototype.findVertical = function (map, tangent, right) {
   let gridCoordinates = intersection.toGrid(map.height)
   // Calculate the change in x and y coordinates that will be required to iterate across boundaries.
   const dX = right ? map.height : -map.height
-  const dY = map.height / tangent
+  const dY = map.height * tangent
   // Look for boundaries with walls.
   while (map.isWithinBounds(gridCoordinates)) {
     // Determine if the intersection is with a wall.
