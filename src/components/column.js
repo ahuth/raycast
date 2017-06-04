@@ -5,7 +5,7 @@ export default function Column({color, distance, mapHeight, number, resolution, 
   const height = Math.min(mapHeight / distance * 255, screenHeight)
   const width = screenWidth / resolution
   const top = (screenHeight / 2) - (height / 2)
-  const adjustedColor = Color(color).darken(distance / 1000).hex()
+  const adjustedColor = Color(color).darken(distance / 600).hex()
   const styles = {
     backgroundColor: adjustedColor,
     height: height,
