@@ -47,7 +47,7 @@ Player.prototype.castHorizontal = function (map, angle) {
   // Convert to grid coordinates, so we can determine if the this part of the map is a wall or not.
   let gridCoordinates = intersection.toGrid(map.height)
   // Calculate the change in x and y coordinates that will be required to iterate across boundaries.
-  const dY = map.height
+  const dY = up ? -map.height : map.height
   const dX = map.height / Math.tan(angle)
   // Look for boundaries with walls.
   while (map.isWithinBounds(gridCoordinates)) {
@@ -57,7 +57,7 @@ Player.prototype.castHorizontal = function (map, angle) {
       return Math.hypot(this.x - intersection.x, this.y - intersectionY)
     }
     // We have _not_ intersected a wall, yet. Find the next intersection.
-    intersection = intersection.add(dX, (up ? -dY : dY))
+    intersection = intersection.add(dX, dY)
     gridCoordinates = intersection.toGrid(map.height)
   }
   // No boundaries were found within the map and the distance is effectively infinite.
