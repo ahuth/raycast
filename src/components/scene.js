@@ -1,13 +1,18 @@
 import PropTypes from "prop-types"
 import React from "react"
 import Column from "./column"
-import "./scene.css"
 
 export default class Scene extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.update = this.update.bind(this)
     this.state = {columns: []}
+    this.styles = {
+      height: props.height,
+      width: props.width,
+      border: "1px solid black",
+      position: "relative"
+    }
   }
 
   componentWillMount() {
@@ -27,7 +32,7 @@ export default class Scene extends React.Component {
 
   render() {
     return (
-      <div className="scene">
+      <div style={this.styles}>
         {this.state.columns.map((ray, index) => {
           return (
             <Column
