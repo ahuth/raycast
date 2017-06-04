@@ -77,7 +77,7 @@ Player.prototype.findHorizontal = function (map, slope, up) {
 Player.prototype.findVertical = function (map, slope, right) {
   // Calculate the coordinates of the first vertical intersection with a grid boundary.
   const intersectionX = Math.floor(this.x / map.height) * map.height + (right ? map.height : -1)
-  const intersectionY = this.y + (this.x - intersectionX) / slope
+  const intersectionY = this.y + (this.x - intersectionX) * slope
   let intersection = new Point(intersectionX, intersectionY)
   // Convert to grid coordinates, so we can determine if the this part of the map is a wall or not.
   let gridCoordinates = intersection.toGrid(map.height)
