@@ -42,7 +42,7 @@ Player.prototype.castRay = function (map, rawAngle) {
 // Find the distance to the first intersection with a horizontal boundary of a wall.
 Player.prototype.castHorizontal = function (map, angle) {
   // Determine if the ray is travelling up or down.
-  const up = angle > Math.PI && angle < twoPi
+  const up = angle > 0 && angle < Math.PI
   // Calculate the coordinates of the first horizontal intersection with a grid boundary.
   const intersectionY = Math.floor(this.y / map.height) * map.height + (up ? -1 : map.height)
   const intersectionX = this.x + (this.y - intersectionY) / Math.tan(angle)
