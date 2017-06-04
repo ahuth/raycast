@@ -29,30 +29,35 @@ Player.prototype.castRays = function (map, fov, resolution) {
 Player.prototype.castRay = function (map, rawAngle) {
   // Ensure that the angle is between 0 and 360 degrees.
   const angle = normalizeRadians(rawAngle)
-  // Determine the distance to the first horizontal wall.
-  const horizontalDistance = this.castHorizontal(map, angle)
-  // Determine the distance to the first vertical wall.
-  const verticalDistance = this.castVertical(map, angle)
-  // Return the shortest distance between the horizontal and vertical distances.
-  const distance = Math.min(horizontalDistance, verticalDistance)
+  // Find the raw distance to the nearest wall.
+  const distance = this.findDistance(map, angle)
   // Correct for fishbowl-effect resulting from mixing polar and cartesian coordinates.
-  const correctedDistance = distance * Math.cos(rawAngle - this.direction)
-  return correctedDistance
+  return distance * Math.cos(angle - this.direction)
+}
+
+Player.prototype.findDistance = function (map, angle) {
+  // Determine if the ray is travelling up/down and left/right.
+  const up = angle > 0 && angle < Math.PI
+  const right = angle < (twoPi * 0.25) || angle > (twoPi * 0.75)
+  // Pre-calculate the slope of the line in our coordinate system from the angle.
+  const angleTangent = Math.tan(angle)
+  // Find the closest distance to horizontal and vertical walls and return the closest.
+  const horizontal = this.findHorizontal(map, angleTangent, up)
+  const vertical = this.findVertical(map, angleTangent, right)
+  return Math.min(horizontal, vertical)
 }
 
 // Find the distance to the first intersection with a horizontal boundary of a wall.
-Player.prototype.castHorizontal = function (map, angle) {
-  // Determine if the ray is travelling up or down.
-  const up = angle > 0 && angle < Math.PI
-  // Calculate the coordinates of the first horizontal intersection with a grid boundary.
+Player.prototype.findHorizontal = function (map, tangent, up) {
+  // Find the starting position at the first horizontal intersection with a grid boundary.
   const intersectionY = Math.floor(this.y / map.height) * map.height + (up ? -1 : map.height)
-  const intersectionX = this.x + (this.y - intersectionY) / Math.tan(angle)
+  const intersectionX = this.x + (this.y - intersectionY) / tangent
   let intersection = new Point(intersectionX, intersectionY)
   // Convert to grid coordinates, so we can determine if the this part of the map is a wall or not.
   let gridCoordinates = intersection.toGrid(map.height)
   // Calculate the change in x and y coordinates that will be required to iterate across boundaries.
   const dY = up ? -map.height : map.height
-  const dX = map.height / Math.tan(angle)
+  const dX = map.height / tangent
   // Look for boundaries with walls.
   while (map.isWithinBounds(gridCoordinates)) {
     // Determine if the intersection is with a wall.
@@ -69,18 +74,16 @@ Player.prototype.castHorizontal = function (map, angle) {
 }
 
 // Find the distance to the first intersection with a vertical boundary of a wall.
-Player.prototype.castVertical = function (map, angle) {
-  // Determine if the ray is travelling left or right.
-  const right = angle < (twoPi * 0.25) || angle > (twoPi * 0.75)
+Player.prototype.findVertical = function (map, tangent, right) {
   // Calculate the coordinates of the first vertical intersection with a grid boundary.
   const intersectionX = Math.floor(this.x / map.height) * map.height + (right ? map.height : -1)
-  const intersectionY = this.y + (this.x - intersectionX) / Math.tan(angle)
+  const intersectionY = this.y + (this.x - intersectionX) / tangent
   let intersection = new Point(intersectionX, intersectionY)
   // Convert to grid coordinates, so we can determine if the this part of the map is a wall or not.
   let gridCoordinates = intersection.toGrid(map.height)
   // Calculate the change in x and y coordinates that will be required to iterate across boundaries.
   const dX = right ? map.height : -map.height
-  const dY = map.height / Math.tan(angle)
+  const dY = map.height / tangent
   // Look for boundaries with walls.
   while (map.isWithinBounds(gridCoordinates)) {
     // Determine if the intersection is with a wall.
