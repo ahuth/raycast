@@ -68,5 +68,26 @@ Player.prototype.castHorizontal = function (map, angle) {
 Player.prototype.castVertical = function (map, angle) {
   // Determine if the ray is travelling left or right.
   const right = angle < (twoPi * 0.25) || angle > (twoPi * 0.75)
+  // Calculate the coordinates of the first vertical intersection with a grid boundary.
+  const intersectionX = Math.floor(this.x / map.height) * map.height + (right ? map.height : -1)
+  const intersectionY = this.y + (this.x - intersectionX) / Math.tan(angle)
+  let intersection = new Point(intersectionX, intersectionY)
+  // Convert to grid coordinates, so we can determine if the this part of the map is a wall or not.
+  let gridCoordinates = intersection.toGrid(map.height)
+  // Calculate the change in x and y coordinates that will be required to iterate across boundaries.
+  const dX = right ? map.height : -map.height
+  const dY = map.height / Math.tan(angle)
+  // Look for boundaries with walls.
+  while (map.isWithinBounds(gridCoordinates)) {
+    // Determine if the intersection is with a wall.
+    if (map.isWall(gridCoordinates)) {
+      // We have intersected a wall, so return the distance to it.
+      return Math.hypot(this.x - intersection.x, this.y - intersectionY)
+    }
+    // We have _not_ intersected a wall, yet. Find the next intersection.
+    intersection = intersection.add(dX, dY)
+    gridCoordinates = intersection.toGrid(map.height)
+  }
+  // No boundaries were found within the map and the distance is effectively infinite.
   return Infinity
 }
