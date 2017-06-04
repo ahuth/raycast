@@ -28,13 +28,29 @@ Player.prototype.castRays = function (map, fov, resolution) {
 Player.prototype.castRay = function (map, rawAngle) {
   // Ensure that the angle is between 0 and 360 degrees.
   const angle = normalizeRadians(rawAngle)
-  // Determine if the ray is travelling up/down and left/right.
+  // Determine the distance to the first horizontal wall.
+  const horizontalDistance = this.castHorizontal(map, angle)
+  // Determine the distance to the first vertical wall.
+  const verticalDistance = this.castVertical(map, angle)
+  // Return the shortest distance between the horizontal and vertical distances.
+  return Math.min(horizontalDistance, verticalDistance)
+}
+
+// Find the distance to the first intersection with a horizontal boundary of a wall.
+Player.prototype.castHorizontal = function (map, angle) {
+  // Determine if the ray is travelling up or down.
   const up = angle > 0 && angle < Math.PI
-  const right = angle < (twoPi * 0.25) || angle > (twoPi * 0.75)
   // Calculate the coordinates of the first horizontal intersection with a grid boundary.
   const intersectionY = Math.floor(this.y / map.height) * map.height + (up ? -1 : map.height)
   const intersectionX = this.x + (this.y - intersectionY) / Math.tan(angle)
   const intersection = new Point(intersectionX, intersectionY)
   const gridCoordinates = intersection.toGrid(map.height)
   return map.isWall(gridCoordinates)
+}
+
+// Find the distance to the first intersection with a vertical boundary of a wall.
+Player.prototype.castVertical = function (map, angle) {
+  // Determine if the ray is travelling left or right.
+  const right = angle < (twoPi * 0.25) || angle > (twoPi * 0.75)
+  return Infinity
 }
