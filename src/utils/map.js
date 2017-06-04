@@ -22,3 +22,20 @@ Map.prototype.isWall = function (point) {
 Map.prototype.isWithinBounds = function (point) {
   return point.x >= 0 && point.x < this.size && point.y >=0 && point.y < this.size
 }
+
+Map.prototype.room = function () {
+  this.size = 10
+  this.grid = [
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1],
+    [1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1],
+    [1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1],
+    [1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+  ]
+  return this
+}

@@ -11,8 +11,8 @@ export default function App() {
       <Scene
         resolution={320}
         fov={fromDegrees(60)}
-        map={new Map(32, 64).randomize()}
-        player={new Player(1024, 1024, 32, fromDegrees(54))}
+        map={new Map(10, 64).room()}
+        player={new Player(140, 140, 32, fromDegrees(315))}
         height={400}
         width={720}
       />
