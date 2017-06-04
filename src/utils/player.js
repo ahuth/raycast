@@ -16,10 +16,11 @@ Player.prototype.castRays = function (map, fov, resolution) {
   // between each ray.
   const angleBetweenRays = fov / resolution
   // The player's direction is the center of the screen, and the left edge of the screen is half
-  // the field of view to the left.
-  const startAngle = this.direction - fov / 2
+  // the field of view to the left. In our coordinate system, angles increase as we turn counter-
+  // clockwise, so we add to player's current direction.
+  const startAngle = this.direction + fov / 2
   // Generate the angle for each ray starting from the left and sweeping to the right screen edge.
-  const rayAngles = new Array(resolution).fill(0).map((_, index) => startAngle + index * angleBetweenRays)
+  const rayAngles = new Array(resolution).fill(0).map((_, index) => startAngle - index * angleBetweenRays)
   // Calculate the distance from each ray to the nearest wall.
   return rayAngles.map(angle => this.castRay(map, angle))
 }
