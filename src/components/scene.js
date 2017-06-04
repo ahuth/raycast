@@ -37,8 +37,9 @@ export default class Scene extends React.Component {
           return (
             <Column
               color="blue"
-              distance={100}
+              distance={ray}
               key={index}
+              mapHeight={this.props.map.height}
               number={index}
               resolution={this.props.resolution}
               screenHeight={400}
