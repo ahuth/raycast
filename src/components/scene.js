@@ -36,7 +36,7 @@ export default class Scene extends React.Component {
         {this.state.columns.map((ray, index) => {
           return (
             <Column
-              color="blue"
+              color="#0000FF"
               distance={ray}
               key={index}
               mapHeight={this.props.map.height}
