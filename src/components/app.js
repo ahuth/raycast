@@ -12,7 +12,7 @@ export default function App() {
         resolution={320}
         fov={fromDegrees(60)}
         map={new Map(10, 64).room()}
-        player={new Player(140, 140, 32, fromDegrees(315))}
+        player={new Player(140, 140, 32, fromDegrees(0))}
         height={400}
         width={720}
       />
