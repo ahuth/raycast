@@ -33,7 +33,10 @@ Player.prototype.castRay = function (map, rawAngle) {
   // Determine the distance to the first vertical wall.
   const verticalDistance = this.castVertical(map, angle)
   // Return the shortest distance between the horizontal and vertical distances.
-  return Math.min(horizontalDistance, verticalDistance)
+  const distance = Math.min(horizontalDistance, verticalDistance)
+  // Correct for fishbowl-effect resulting from mixing polar and cartesian coordinates.
+  const correctedDistance = distance * Math.cos(rawAngle - this.direction)
+  return correctedDistance
 }
 
 // Find the distance to the first intersection with a horizontal boundary of a wall.
