@@ -44,8 +44,11 @@ Player.prototype.castHorizontal = function (map, angle) {
   const intersectionY = Math.floor(this.y / map.height) * map.height + (up ? -1 : map.height)
   const intersectionX = this.x + (this.y - intersectionY) / Math.tan(angle)
   const intersection = new Point(intersectionX, intersectionY)
+  // Convert to grid coordinates, so we can determine if the this part of the map is a wall or not.
   const gridCoordinates = intersection.toGrid(map.height)
-  return map.isWall(gridCoordinates)
+  // If there is no intersection within the map, the distance is effectively infinite.
+  if (!map.isWithinBounds(gridCoordinates)) { return Infinity }
+  return Infinity
 }
 
 // Find the distance to the first intersection with a vertical boundary of a wall.
