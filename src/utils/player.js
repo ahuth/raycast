@@ -41,60 +41,20 @@ Player.prototype.findDistance = function (map, angle) {
   const right = angle < (twoPi * 0.25) || angle > (twoPi * 0.75)
   // Pre-calculate the slope of the line in our coordinate system from the angle.
   const slope = Math.tan(angle)
-  // Find the closest distance to horizontal and vertical walls and return the closest.
-  const horizontal = this.findHorizontal(map, slope, up)
-  const vertical = this.findVertical(map, slope, right)
-  return Math.min(horizontal, vertical)
-}
-
-// Find the distance to the first intersection with a horizontal boundary of a wall.
-Player.prototype.findHorizontal = function (map, slope, up) {
-  // Find the starting position at the first horizontal intersection with a grid boundary.
-  const intersectionY = Math.floor(this.y / map.height) * map.height + (up ? -1 : map.height)
-  const intersectionX = this.x + (this.y - intersectionY) / slope
-  let intersection = new Point(intersectionX, intersectionY)
-  // Convert to grid coordinates, so we can determine if the this part of the map is a wall or not.
-  let gridCoordinates = intersection.toGrid(map.height)
-  // Calculate the change in x and y coordinates that will be required to iterate across boundaries.
-  const dY = up ? -map.height : map.height
-  const dX = map.height / slope
-  // Look for boundaries with walls.
-  while (map.isWithinBounds(gridCoordinates)) {
+  // Really naive algorithm to do this... probably really slow, too.
+  const dx = right ? 1 : -1
+  const dy = Math.abs(slope) * (up ? -1 : 1)
+  let position = new Point(this.x, this.y)
+  let gridPosition = position.toGrid(map.height)
+  while (map.isWithinBounds(gridPosition)) {
     // Determine if the intersection is with a wall.
-    if (map.isWall(gridCoordinates)) {
+    if (map.isWall(gridPosition)) {
       // We have intersected a wall, so return the distance to it.
-      return Math.hypot(this.x - intersection.x, this.y - intersectionY)
+      return Math.hypot(this.x - position.x, this.y - position.y)
     }
     // We have _not_ intersected a wall, yet. Find the next intersection.
-    intersection = intersection.add(dX, dY)
-    gridCoordinates = intersection.toGrid(map.height)
+    position = position.add(dx, dy)
+    gridPosition = position.toGrid(map.height)
   }
-  // No boundaries were found within the map and the distance is effectively infinite.
-  return Infinity
-}
-
-// Find the distance to the first intersection with a vertical boundary of a wall.
-Player.prototype.findVertical = function (map, slope, right) {
-  // Calculate the coordinates of the first vertical intersection with a grid boundary.
-  const intersectionX = Math.floor(this.x / map.height) * map.height + (right ? map.height : -1)
-  const intersectionY = this.y + (this.x - intersectionX) * slope
-  let intersection = new Point(intersectionX, intersectionY)
-  // Convert to grid coordinates, so we can determine if the this part of the map is a wall or not.
-  let gridCoordinates = intersection.toGrid(map.height)
-  // Calculate the change in x and y coordinates that will be required to iterate across boundaries.
-  const dX = right ? map.height : -map.height
-  const dY = map.height * slope
-  // Look for boundaries with walls.
-  while (map.isWithinBounds(gridCoordinates)) {
-    // Determine if the intersection is with a wall.
-    if (map.isWall(gridCoordinates)) {
-      // We have intersected a wall, so return the distance to it.
-      return Math.hypot(this.x - intersection.x, this.y - intersectionY)
-    }
-    // We have _not_ intersected a wall, yet. Find the next intersection.
-    intersection = intersection.add(dX, dY)
-    gridCoordinates = intersection.toGrid(map.height)
-  }
-  // No boundaries were found within the map and the distance is effectively infinite.
   return Infinity
 }
