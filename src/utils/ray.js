@@ -19,15 +19,16 @@ Ray.prototype.cast = function () {
 
 // Determine the distance the ray will travel before hitting a _horizontal_ wall.
 function castHorizontal(map, origin, angle) {
-  // Determine if the ray is travelling up or down.
+  // Determine the direction the ray is travelling.
   const up = angle > 0 && angle < Math.PI
+  const right = angle < (twoPi * 0.25) || angle > (twoPi * 0.75)
   // Calculate the coordinates of the first horizontal intersection with a grid boundary.
   const intersectionY = Math.floor(origin.y / map.height) * map.height + (up ? -1 : map.height)
   const intersectionX = origin.x + (origin.y - intersectionY) / Math.tan(angle)
-  let intersection = new Point(intersectionX, intersectionY)
+  const intersection = new Point(intersectionX, intersectionY)
   // Calculate the change in x and y coordinates needed to iterate across boundaries.
   const deltaY = up ? -map.height : map.height
-  const deltaX = map.height / Math.tan(angle)
+  const deltaX = Math.abs(map.height / Math.tan(angle)) * (right ? 1 : -1)
   // Find the nearest intersection and return the distance to it.
   const wall = findWall(map, intersection, deltaX, deltaY)
   return wall ? wall.distance(origin) : Infinity
@@ -36,14 +37,15 @@ function castHorizontal(map, origin, angle) {
 // Determine the distance the ray will travel before hitting a _vertical_ wall.
 function castVertical(map, origin, angle) {
   // Determine if the ray is travelling left or right.
+  const up = angle > 0 && angle < Math.PI
   const right = angle < (twoPi * 0.25) || angle > (twoPi * 0.75)
   // Calculate the coordinates of the first vertical intersection with a grid boundary.
   const intersectionX = Math.floor(origin.x / map.height) * map.height + (right ? map.height : -1)
   const intersectionY = origin.y + (origin.x - intersectionX) / Math.tan(angle)
-  let intersection = new Point(intersectionX, intersectionY)
+  const intersection = new Point(intersectionX, intersectionY)
   // Calculate the change in x and y coordinates needed to iterate across boundaries.
   const deltaX = right ? map.height : -map.height
-  const deltaY = map.height / Math.tan(angle)
+  const deltaY = Math.abs(map.height / Math.tan(angle)) * (up ? -1 : 1)
   // Find the nearest intersection and return the distance to it.
   const wall = findWall(map, intersection, deltaX, deltaY)
   return wall ? wall.distance(origin) : Infinity
