@@ -31,3 +31,11 @@ Player.prototype.castRay = function (map, angle) {
   // Correct for fishbowl-effect resulting from mixing polar and cartesian coordinates.
   return distance * Math.cos(angle - this.direction)
 }
+
+Player.prototype.turnRight = function () {
+  this.direction -= 0.01
+}
+
+Player.prototype.turnLeft = function () {
+  this.direction += 0.01
+}
