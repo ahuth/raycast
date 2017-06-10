@@ -43,28 +43,45 @@ Player.prototype.turnLeft = function () {
   this.direction += turnRotation
 }
 
-Player.prototype.moveForward = function () {
+Player.prototype.moveForward = function (map) {
   const deltaX = stepDistance * Math.cos(this.direction)
   const deltaY = stepDistance * Math.sin(this.direction)
-  this.position = this.position.add(deltaX, -deltaY)
+  this.position = this.position.add(
+    adjustDelta(map, this.position.add(deltaX, 0), deltaX),
+    adjustDelta(map, this.position.add(0, -deltaY), -deltaY)
+  )
 }
 
-Player.prototype.moveBackward = function () {
+Player.prototype.moveBackward = function (map) {
   const deltaX = stepDistance * Math.cos(this.direction)
   const deltaY = stepDistance * Math.sin(this.direction)
-  this.position = this.position.add(-deltaX, deltaY)
+  this.position = this.position.add(
+    adjustDelta(map, this.position.add(-deltaX, 0), -deltaX),
+    adjustDelta(map, this.position.add(0, deltaY), deltaY)
+  )
 }
 
 // Step to the left, which is the same as stepping forward but rotated 90 degrees to the left.
-Player.prototype.moveLeft = function () {
+Player.prototype.moveLeft = function (map) {
   const deltaX = stepDistance * Math.cos(this.direction + Math.PI / 2)
   const deltaY = stepDistance * Math.sin(this.direction + Math.PI / 2)
-  this.position = this.position.add(deltaX, -deltaY)
+  this.position = this.position.add(
+    adjustDelta(map, this.position.add(deltaX, 0), deltaX),
+    adjustDelta(map, this.position.add(0, -deltaY), -deltaY)
+  )
 }
 
 // Step to the right, which is the same as stepping backward but rotated 90 degrees to the left.
-Player.prototype.moveRight = function () {
+Player.prototype.moveRight = function (map) {
   const deltaX = stepDistance * Math.cos(this.direction + Math.PI / 2)
   const deltaY = stepDistance * Math.sin(this.direction + Math.PI / 2)
-  this.position = this.position.add(-deltaX, deltaY)
+  this.position = this.position.add(
+    adjustDelta(map, this.position.add(-deltaX, 0), -deltaX),
+    adjustDelta(map, this.position.add(0, deltaY), deltaY)
+  )
+}
+
+function adjustDelta(map, proposed, delta) {
+  const gridCoordinates = proposed.toGrid(map.height)
+  return map.isWall(gridCoordinates) ? 0 : delta
 }

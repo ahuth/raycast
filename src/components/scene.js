@@ -37,10 +37,10 @@ export default class Scene extends React.Component {
 
   update(seconds) {
     if (this.state.w || this.state.s || this.state.a || this.state.d || this.state.ArrowLeft || this.state.ArrowRight) {
-      if (this.state.w) { this.props.player.moveForward() }
-      if (this.state.s) { this.props.player.moveBackward() }
-      if (this.state.a) { this.props.player.moveLeft() }
-      if (this.state.d) { this.props.player.moveRight() }
+      if (this.state.w) { this.props.player.moveForward(this.props.map) }
+      if (this.state.s) { this.props.player.moveBackward(this.props.map) }
+      if (this.state.a) { this.props.player.moveLeft(this.props.map) }
+      if (this.state.d) { this.props.player.moveRight(this.props.map) }
       if (this.state.ArrowLeft) { this.props.player.turnLeft() }
       if (this.state.ArrowRight) { this.props.player.turnRight() }
       this.renderScene()
