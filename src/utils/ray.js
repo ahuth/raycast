@@ -41,11 +41,11 @@ function castVertical(map, origin, angle) {
   const right = angle < (twoPi * 0.25) || angle > (twoPi * 0.75)
   // Calculate the coordinates of the first vertical intersection with a grid boundary.
   const intersectionX = Math.floor(origin.x / map.height) * map.height + (right ? map.height : -1)
-  const intersectionY = origin.y + (origin.x - intersectionX) / Math.tan(angle)
+  const intersectionY = origin.y + (origin.x - intersectionX) * Math.tan(angle)
   const intersection = new Point(intersectionX, intersectionY)
   // Calculate the change in x and y coordinates needed to iterate across boundaries.
   const deltaX = right ? map.height : -map.height
-  const deltaY = Math.abs(map.height / Math.tan(angle)) * (up ? -1 : 1)
+  const deltaY = Math.abs(map.height * Math.tan(angle)) * (up ? -1 : 1)
   // Find the nearest intersection and return the distance to it.
   const wall = findWall(map, intersection, deltaX, deltaY)
   return wall ? wall.distance(origin) : Infinity
