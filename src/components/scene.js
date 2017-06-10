@@ -6,6 +6,7 @@ export default class Scene extends React.Component {
   constructor(props) {
     super(props)
     this.update = this.update.bind(this)
+    this.renderScene = this.renderScene.bind(this)
     this.state = {columns: []}
     this.styles = {
       height: props.height,
@@ -20,7 +21,7 @@ export default class Scene extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({columns: this.props.player.castRays(this.props.map, this.props.fov, this.props.resolution)})
+    this.renderScene()
   }
 
   componentWillUnmount() {
@@ -28,6 +29,10 @@ export default class Scene extends React.Component {
   }
 
   update(seconds) {
+  }
+
+  renderScene() {
+    this.setState({columns: this.props.player.castRays(this.props.map, this.props.fov, this.props.resolution)})
   }
 
   render() {
