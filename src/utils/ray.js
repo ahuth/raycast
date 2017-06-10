@@ -9,19 +9,19 @@ export default function Ray(map, angle, x, y) {
 
 // Determine the distance this ray will travel before hitting a wall.
 Ray.prototype.cast = function () {
+  // Determine the direction the ray is travelling.
+  const up = this.angle > 0 && this.angle < Math.PI
+  const right = this.angle < (twoPi * 0.25) || this.angle > (twoPi * 0.75)
   // Determine the distance to the first horizontal wall.
-  const horizontalDistance = castHorizontal(this.map, this.origin, this.angle)
+  const horizontalDistance = castHorizontal(this.map, this.origin, this.angle, up, right)
   // Determine the distance to the first vertical wall.
-  const verticalDistance = castVertical(this.map, this.origin, this.angle)
+  const verticalDistance = castVertical(this.map, this.origin, this.angle, up, right)
   // Return the shortest distance between the horizontal and vertical distances.
   return Math.min(horizontalDistance, verticalDistance)
 }
 
 // Determine the distance the ray will travel before hitting a _horizontal_ wall.
-function castHorizontal(map, origin, angle) {
-  // Determine the direction the ray is travelling.
-  const up = angle > 0 && angle < Math.PI
-  const right = angle < (twoPi * 0.25) || angle > (twoPi * 0.75)
+function castHorizontal(map, origin, angle, up, right) {
   // Calculate the coordinates of the first horizontal intersection with a grid boundary.
   const intersectionY = Math.floor(origin.y / map.height) * map.height + (up ? -1 : map.height)
   const intersectionX = origin.x + (origin.y - intersectionY) / Math.tan(angle)
@@ -35,10 +35,7 @@ function castHorizontal(map, origin, angle) {
 }
 
 // Determine the distance the ray will travel before hitting a _vertical_ wall.
-function castVertical(map, origin, angle) {
-  // Determine if the ray is travelling left or right.
-  const up = angle > 0 && angle < Math.PI
-  const right = angle < (twoPi * 0.25) || angle > (twoPi * 0.75)
+function castVertical(map, origin, angle, up, right) {
   // Calculate the coordinates of the first vertical intersection with a grid boundary.
   const intersectionX = Math.floor(origin.x / map.height) * map.height + (right ? map.height : -1)
   const intersectionY = origin.y + (origin.x - intersectionX) * Math.tan(angle)
