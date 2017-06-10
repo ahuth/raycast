@@ -23,7 +23,7 @@ Ray.prototype.cast = function () {
     // Determine if the intersection is with a wall.
     if (this.map.isWall(gridPosition)) {
       // We have intersected a wall, so return the distance to it.
-      return Math.hypot(this.origin.x - position.x, this.origin.y - position.y)
+      return position.distance(this.origin)
     }
     // We have _not_ intersected a wall, yet. Find the next intersection.
     position = position.add(dx, dy)
