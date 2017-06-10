@@ -1,8 +1,8 @@
+import Point from "./point"
 import Ray from "./ray"
 
 export default function Player(x, y, height, direction) {
-  this.x = x
-  this.y = y
+  this.position = new Point(x, y)
   this.height = height
   this.direction = direction
 }
@@ -27,7 +27,7 @@ Player.prototype.castRays = function (map, fov, resolution) {
 // Determine the distance a single ray travels before intersecting a wall.
 Player.prototype.castRay = function (map, angle) {
   // Find the raw distance to the nearest wall.
-  const distance = new Ray(map, angle, this.x, this.y).cast()
+  const distance = new Ray(map, angle, this.position).cast()
   // Correct for fishbowl-effect resulting from mixing polar and cartesian coordinates.
   return distance * Math.cos(angle - this.direction)
 }
@@ -42,12 +42,14 @@ Player.prototype.turnLeft = function () {
 
 Player.prototype.moveForward = function () {
   const distance = 2
-  this.y -= distance * Math.sin(this.direction)
-  this.x += distance * Math.cos(this.direction)
+  const deltaX = distance * Math.cos(this.direction)
+  const deltaY = distance * Math.sin(this.direction)
+  this.position = this.position.add(deltaX, -deltaY)
 }
 
 Player.prototype.moveBackward = function () {
   const distance = 2
-  this.y += distance * Math.sin(this.direction)
-  this.x -= distance * Math.cos(this.direction)
+  const deltaX = distance * Math.cos(this.direction)
+  const deltaY = distance * Math.sin(this.direction)
+  this.position = this.position.add(-deltaX, deltaY)
 }
