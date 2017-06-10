@@ -51,11 +51,14 @@ function castVertical(map, origin, angle, up, right) {
 // Recurse until we either leave the boundaries of the map or hit a wall.
 function findWall(map, position, deltaX, deltaY) {
   const gridCoordinates = position.toGrid(map.height)
-  if (map.isWithinBounds(gridCoordinates)) {
-    if (map.isWall(gridCoordinates)) {
-      return position
-    }
-    return findWall(map, position.add(deltaX, deltaY), deltaX, deltaY)
+
+  if (!map.isWithinBounds(gridCoordinates)) {
+    return new Point(Infinity, Infinity)
   }
-  return new Point(Infinity, Infinity)
+
+  if (map.isWall(gridCoordinates)) {
+    return position
+  }
+
+  return findWall(map, position.add(deltaX, deltaY), deltaX, deltaY)
 }
