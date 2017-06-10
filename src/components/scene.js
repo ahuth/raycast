@@ -62,6 +62,8 @@ export default class Scene extends React.Component {
   render() {
     return (
       <div style={this.styles}>
+        <div style={styles.ceiling}></div>
+        <div style={styles.floor}></div>
         {this.state.columns.map((ray, index) => {
           return (
             <Column
@@ -78,6 +80,25 @@ export default class Scene extends React.Component {
         })}
       </div>
     )
+  }
+}
+
+const styles = {
+  ceiling: {
+    backgroundColor: "SlateGrey",
+    position: "absolute",
+    left: 0,
+    right: 0,
+    bottom: "50%",
+    top: 0
+  },
+  floor: {
+    backgroundColor: "Gainsboro",
+    position: "absolute",
+    left: 0,
+    right: 0,
+    bottom: 0,
+    top: "50%"
   }
 }
 
