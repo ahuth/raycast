@@ -33,21 +33,21 @@ Player.prototype.castRay = function (map, angle) {
 }
 
 Player.prototype.turnRight = function () {
-  this.direction -= 0.01
+  this.direction -= 0.03
 }
 
 Player.prototype.turnLeft = function () {
-  this.direction += 0.01
+  this.direction += 0.03
 }
 
 Player.prototype.moveForward = function () {
-  const distance = 1
+  const distance = 2
   this.y -= distance * Math.sin(this.direction)
   this.x += distance * Math.cos(this.direction)
 }
 
 Player.prototype.moveBackward = function () {
-  const distance = 1
+  const distance = 2
   this.y += distance * Math.sin(this.direction)
   this.x -= distance * Math.cos(this.direction)
 }
