@@ -48,7 +48,7 @@ function castVertical(map, origin, angle, up, right) {
   return wall.distance(origin)
 }
 
-// Recurse until we either leave the boundaries of the map or hit a wall.
+// Process each step the ray takes until encountering a wall or the bounds of the map.
 function findWall(map, position, deltaX, deltaY) {
   const gridCoordinates = position.toGrid(map.height)
 
