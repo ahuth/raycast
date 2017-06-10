@@ -44,7 +44,6 @@ export default class Scene extends React.Component {
               resolution={this.props.resolution}
               screenHeight={400}
               screenWidth={720}
-              width={2}
             />
           )
         })}
