@@ -9,25 +9,53 @@ export default function Ray(map, angle, x, y) {
 
 // Determine the distance this ray will travel before hitting a wall.
 Ray.prototype.cast = function () {
-  // Determine if the ray is travelling up/down and left/right.
-  const up = this.angle > 0 && this.angle < Math.PI
-  const right = this.angle < (twoPi * 0.25) || this.angle > (twoPi * 0.75)
-  // Pre-calculate the slope of the line in our coordinate system from the angle.
-  const slope = Math.tan(this.angle)
-  // Really naive algorithm to do this... probably really slow, too.
-  const dx = right ? 1 : -1
-  const dy = Math.abs(slope) * (up ? -1 : 1)
-  let position = new Point(this.origin.x, this.origin.y)
-  let gridPosition = position.toGrid(this.map.height)
-  while (this.map.isWithinBounds(gridPosition)) {
-    // Determine if the intersection is with a wall.
-    if (this.map.isWall(gridPosition)) {
-      // We have intersected a wall, so return the distance to it.
-      return position.distance(this.origin)
+  // Determine the distance to the first horizontal wall.
+  const horizontalDistance = castHorizontal(this.map, this.origin, this.angle)
+  // Determine the distance to the first vertical wall.
+  const verticalDistance = castVertical(this.map, this.origin, this.angle)
+  // Return the shortest distance between the horizontal and vertical distances.
+  return Math.min(horizontalDistance, verticalDistance)
+}
+
+// Determine the distance the ray will travel before hitting a _horizontal_ wall.
+function castHorizontal(map, origin, angle) {
+  // Determine if the ray is travelling up or down.
+  const up = angle > 0 && angle < Math.PI
+  // Calculate the coordinates of the first horizontal intersection with a grid boundary.
+  const intersectionY = Math.floor(origin.y / map.height) * map.height + (up ? -1 : map.height)
+  const intersectionX = origin.x + (origin.y - intersectionY) / Math.tan(angle)
+  let intersection = new Point(intersectionX, intersectionY)
+  // Calculate the change in x and y coordinates needed to iterate across boundaries.
+  const deltaY = up ? -map.height : map.height
+  const deltaX = map.height / Math.tan(angle)
+  // Find the nearest intersection and return the distance to it.
+  const wall = findWall(map, intersection, deltaX, deltaY)
+  return wall ? wall.distance(origin) : Infinity
+}
+
+// Determine the distance the ray will travel before hitting a _vertical_ wall.
+function castVertical(map, origin, angle) {
+  // Determine if the ray is travelling left or right.
+  const right = angle < (twoPi * 0.25) || angle > (twoPi * 0.75)
+  // Calculate the coordinates of the first vertical intersection with a grid boundary.
+  const intersectionX = Math.floor(origin.x / map.height) * map.height + (right ? map.height : -1)
+  const intersectionY = origin.y + (origin.x - intersectionX) / Math.tan(angle)
+  let intersection = new Point(intersectionX, intersectionY)
+  // Calculate the change in x and y coordinates needed to iterate across boundaries.
+  const deltaX = right ? map.height : -map.height
+  const deltaY = map.height / Math.tan(angle)
+  // Find the nearest intersection and return the distance to it.
+  const wall = findWall(map, intersection, deltaX, deltaY)
+  return wall ? wall.distance(origin) : Infinity
+}
+
+// Recurse until we either leave the boundaries of the map or hit a wall.
+function findWall(map, position, deltaX, deltaY) {
+  const gridCoordinates = position.toGrid(map.height)
+  if (map.isWithinBounds(gridCoordinates)) {
+    if (map.isWall(gridCoordinates)) {
+      return position
     }
-    // We have _not_ intersected a wall, yet. Find the next intersection.
-    position = position.add(dx, dy)
-    gridPosition = position.toGrid(this.map.height)
+    return findWall(map, position.add(deltaX, deltaY), deltaX, deltaY)
   }
-  return Infinity
 }
