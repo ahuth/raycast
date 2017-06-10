@@ -31,7 +31,7 @@ function castHorizontal(map, origin, angle, up, right) {
   const deltaX = Math.abs(map.height / Math.tan(angle)) * (right ? 1 : -1)
   // Find the nearest intersection and return the distance to it.
   const wall = findWall(map, intersection, deltaX, deltaY)
-  return wall ? wall.distance(origin) : Infinity
+  return wall.distance(origin)
 }
 
 // Determine the distance travelled before hitting a _vertical_ wall.
@@ -45,7 +45,7 @@ function castVertical(map, origin, angle, up, right) {
   const deltaY = Math.abs(map.height * Math.tan(angle)) * (up ? -1 : 1)
   // Find the nearest intersection and return the distance to it.
   const wall = findWall(map, intersection, deltaX, deltaY)
-  return wall ? wall.distance(origin) : Infinity
+  return wall.distance(origin)
 }
 
 // Recurse until we either leave the boundaries of the map or hit a wall.
@@ -57,4 +57,5 @@ function findWall(map, position, deltaX, deltaY) {
     }
     return findWall(map, position.add(deltaX, deltaY), deltaX, deltaY)
   }
+  return new Point(Infinity, Infinity)
 }
