@@ -1,6 +1,9 @@
 import Point from "./point"
 import Ray from "./ray"
 
+const stepDistance = 2
+const turnRotation = 0.03
+
 export default function Player(x, y, height, direction) {
   this.position = new Point(x, y)
   this.height = height
@@ -33,39 +36,35 @@ Player.prototype.castRay = function (map, angle) {
 }
 
 Player.prototype.turnRight = function () {
-  this.direction -= 0.03
+  this.direction -= turnRotation
 }
 
 Player.prototype.turnLeft = function () {
-  this.direction += 0.03
+  this.direction += turnRotation
 }
 
 Player.prototype.moveForward = function () {
-  const distance = 2
-  const deltaX = distance * Math.cos(this.direction)
-  const deltaY = distance * Math.sin(this.direction)
+  const deltaX = stepDistance * Math.cos(this.direction)
+  const deltaY = stepDistance * Math.sin(this.direction)
   this.position = this.position.add(deltaX, -deltaY)
 }
 
 Player.prototype.moveBackward = function () {
-  const distance = 2
-  const deltaX = distance * Math.cos(this.direction)
-  const deltaY = distance * Math.sin(this.direction)
+  const deltaX = stepDistance * Math.cos(this.direction)
+  const deltaY = stepDistance * Math.sin(this.direction)
   this.position = this.position.add(-deltaX, deltaY)
 }
 
 // Step to the left, which is the same as stepping forward but rotated 90 degrees to the left.
 Player.prototype.moveLeft = function () {
-  const distance = 2
-  const deltaX = distance * Math.cos(this.direction + Math.PI / 2)
-  const deltaY = distance * Math.sin(this.direction + Math.PI / 2)
+  const deltaX = stepDistance * Math.cos(this.direction + Math.PI / 2)
+  const deltaY = stepDistance * Math.sin(this.direction + Math.PI / 2)
   this.position = this.position.add(deltaX, -deltaY)
 }
 
 // Step to the right, which is the same as stepping backward but rotated 90 degrees to the left.
 Player.prototype.moveRight = function () {
-  const distance = 2
-  const deltaX = distance * Math.cos(this.direction + Math.PI / 2)
-  const deltaY = distance * Math.sin(this.direction + Math.PI / 2)
+  const deltaX = stepDistance * Math.cos(this.direction + Math.PI / 2)
+  const deltaY = stepDistance * Math.sin(this.direction + Math.PI / 2)
   this.position = this.position.add(-deltaX, deltaY)
 }
