@@ -18,7 +18,7 @@ export default function App() {
           width={720}
         />
       </Loop>
-      <span>Move using the w, s, a, and d keys</span>
+      <span>Move using the w, s, a, d, ←, and → keys</span>
     </div>
   )
 }

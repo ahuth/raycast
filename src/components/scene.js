@@ -21,8 +21,8 @@ export default class Scene extends React.Component {
 
   componentWillMount() {
     this.context.loop.subscribe(this.update)
-    Mousetrap.bind(["w", "s", "a", "d"], this.handleKeyDown, "keydown")
-    Mousetrap.bind(["w", "s", "a", "d"], this.handleKeyUp, "keyup")
+    Mousetrap.bind(["w", "s", "a", "d", "left", "right"], this.handleKeyDown, "keydown")
+    Mousetrap.bind(["w", "s", "a", "d", "left", "right"], this.handleKeyUp, "keyup")
   }
 
   componentDidMount() {
@@ -31,16 +31,18 @@ export default class Scene extends React.Component {
 
   componentWillUnmount() {
     this.context.loop.unsubscribe(this.update)
-    Mousetrap.unbind(["w", "s", "a", "d"], "keydown")
-    Mousetrap.unbind(["w", "s", "a", "d"], "keyup")
+    Mousetrap.unbind(["w", "s", "a", "d", "left", "right"], "keydown")
+    Mousetrap.unbind(["w", "s", "a", "d", "left", "right"], "keyup")
   }
 
   update(seconds) {
-    if (this.state.w || this.state.s || this.state.a || this.state.d) {
+    if (this.state.w || this.state.s || this.state.a || this.state.d || this.state.ArrowLeft || this.state.ArrowRight) {
       if (this.state.w) { this.props.player.moveForward() }
       if (this.state.s) { this.props.player.moveBackward() }
-      if (this.state.a) { this.props.player.turnLeft() }
-      if (this.state.d) { this.props.player.turnRight() }
+      if (this.state.a) { this.props.player.moveLeft() }
+      if (this.state.d) { this.props.player.moveRight() }
+      if (this.state.ArrowLeft) { this.props.player.turnLeft() }
+      if (this.state.ArrowRight) { this.props.player.turnRight() }
       this.renderScene()
     }
   }

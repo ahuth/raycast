@@ -53,3 +53,17 @@ Player.prototype.moveBackward = function () {
   const deltaY = distance * Math.sin(this.direction)
   this.position = this.position.add(-deltaX, deltaY)
 }
+
+Player.prototype.moveLeft = function () {
+  const distance = 2
+  const deltaX = distance * Math.cos(this.direction + Math.PI / 2)
+  const deltaY = distance * Math.sin(this.direction + Math.PI / 2)
+  this.position = this.position.add(deltaX, -deltaY)
+}
+
+Player.prototype.moveRight = function () {
+  const distance = 2
+  const deltaX = distance * Math.cos(this.direction + Math.PI / 2)
+  const deltaY = distance * Math.sin(this.direction + Math.PI / 2)
+  this.position = this.position.add(-deltaX, deltaY)
+}
