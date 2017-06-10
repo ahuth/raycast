@@ -84,3 +84,12 @@ export default class Scene extends React.Component {
 Scene.contextTypes = {
   loop: PropTypes.object
 }
+
+Scene.propTypes = {
+  resolution: PropTypes.number.isRequired,
+  fov: PropTypes.number.isRequired,
+  map: PropTypes.object.isRequired,
+  player: PropTypes.object.isRequired,
+  height: PropTypes.number.isRequired,
+  width: PropTypes.number.isRequired
+}
