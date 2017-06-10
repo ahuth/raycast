@@ -1,5 +1,4 @@
-import Point from "./point"
-import {normalize as normalizeRadians, twoPi} from "./radians"
+import Ray from "./ray"
 
 export default function Player(x, y, height, direction) {
   this.x = x
@@ -26,35 +25,9 @@ Player.prototype.castRays = function (map, fov, resolution) {
 }
 
 // Determine the distance a single ray travels before intersecting a wall.
-Player.prototype.castRay = function (map, rawAngle) {
-  // Ensure that the angle is between 0 and 360 degrees.
-  const angle = normalizeRadians(rawAngle)
+Player.prototype.castRay = function (map, angle) {
   // Find the raw distance to the nearest wall.
-  const distance = this.findDistance(map, angle)
+  const distance = new Ray(map, angle, this.x, this.y).cast()
   // Correct for fishbowl-effect resulting from mixing polar and cartesian coordinates.
   return distance * Math.cos(angle - this.direction)
-}
-
-Player.prototype.findDistance = function (map, angle) {
-  // Determine if the ray is travelling up/down and left/right.
-  const up = angle > 0 && angle < Math.PI
-  const right = angle < (twoPi * 0.25) || angle > (twoPi * 0.75)
-  // Pre-calculate the slope of the line in our coordinate system from the angle.
-  const slope = Math.tan(angle)
-  // Really naive algorithm to do this... probably really slow, too.
-  const dx = right ? 1 : -1
-  const dy = Math.abs(slope) * (up ? -1 : 1)
-  let position = new Point(this.x, this.y)
-  let gridPosition = position.toGrid(map.height)
-  while (map.isWithinBounds(gridPosition)) {
-    // Determine if the intersection is with a wall.
-    if (map.isWall(gridPosition)) {
-      // We have intersected a wall, so return the distance to it.
-      return Math.hypot(this.x - position.x, this.y - position.y)
-    }
-    // We have _not_ intersected a wall, yet. Find the next intersection.
-    position = position.add(dx, dy)
-    gridPosition = position.toGrid(map.height)
-  }
-  return Infinity
 }
