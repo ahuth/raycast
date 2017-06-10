@@ -54,6 +54,7 @@ Player.prototype.moveBackward = function () {
   this.position = this.position.add(-deltaX, deltaY)
 }
 
+// Step to the left, which is the same as stepping forward but rotated 90 degrees to the left.
 Player.prototype.moveLeft = function () {
   const distance = 2
   const deltaX = distance * Math.cos(this.direction + Math.PI / 2)
@@ -61,6 +62,7 @@ Player.prototype.moveLeft = function () {
   this.position = this.position.add(deltaX, -deltaY)
 }
 
+// Step to the right, which is the same as stepping backward but rotated 90 degrees to the left.
 Player.prototype.moveRight = function () {
   const distance = 2
   const deltaX = distance * Math.cos(this.direction + Math.PI / 2)
