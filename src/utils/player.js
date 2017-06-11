@@ -27,11 +27,11 @@ Player.prototype.castRays = function (map, fov, resolution) {
   return rayAngles.map(angle => this.castRay(map, angle))
 }
 
-// Determine the distance a single ray travels before intersecting a wall.
+// Determine the distance a single ray travels before hitting a wall.
 Player.prototype.castRay = function (map, angle) {
   // Find the raw distance to the nearest wall.
   const distance = new Ray(map, angle, this.position).cast()
-  // Correct for fishbowl-effect resulting from mixing polar and cartesian coordinates.
+  // Correct for a fishbowl-effect resulting from mixing polar and cartesian coordinates.
   return distance * Math.cos(angle - this.direction)
 }
 
@@ -81,6 +81,8 @@ Player.prototype.moveRight = function (map) {
   )
 }
 
+// Perform collision-detection to determine if a proposed new position for the player is a valid
+// one. If it is, return the proposed delta. Otherwise, return 0.
 function adjustDelta(map, proposed, delta) {
   const gridCoordinates = proposed.toGrid(map.height)
   return map.isWall(gridCoordinates) ? 0 : delta

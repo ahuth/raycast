@@ -26,10 +26,10 @@ function castHorizontal(map, origin, angle, up, right) {
   const intersectionY = Math.floor(origin.y / map.height) * map.height + (up ? -1 : map.height)
   const intersectionX = origin.x + (origin.y - intersectionY) / Math.tan(angle)
   const intersection = new Point(intersectionX, intersectionY)
-  // Calculate the change in x and y coordinates needed to iterate across boundaries.
+  // Calculate the change in x and y coordinates needed to iterate across grid boundaries.
   const deltaY = up ? -map.height : map.height
   const deltaX = Math.abs(map.height / Math.tan(angle)) * (right ? 1 : -1)
-  // Find the nearest intersection and return the distance to it.
+  // Find the nearest wall and return the distance to it.
   const wall = findWall(map, intersection, deltaX, deltaY)
   return wall.distance(origin)
 }
@@ -40,10 +40,10 @@ function castVertical(map, origin, angle, up, right) {
   const intersectionX = Math.floor(origin.x / map.height) * map.height + (right ? map.height : -1)
   const intersectionY = origin.y + (origin.x - intersectionX) * Math.tan(angle)
   const intersection = new Point(intersectionX, intersectionY)
-  // Calculate the change in x and y coordinates needed to iterate across boundaries.
+  // Calculate the change in x and y coordinates needed to iterate across grid boundaries.
   const deltaX = right ? map.height : -map.height
   const deltaY = Math.abs(map.height * Math.tan(angle)) * (up ? -1 : 1)
-  // Find the nearest intersection and return the distance to it.
+  // Find the nearest wall and return the distance to it.
   const wall = findWall(map, intersection, deltaX, deltaY)
   return wall.distance(origin)
 }
@@ -53,12 +53,15 @@ function findWall(map, position, deltaX, deltaY) {
   const gridCoordinates = position.toGrid(map.height)
 
   if (!map.isWithinBounds(gridCoordinates)) {
+    // This ray is no longer within the bounds of the map. Return a point infinitely far away.
     return new Point(Infinity, Infinity)
   }
 
   if (map.isWall(gridCoordinates)) {
+    // This ray has hit a wall. Return the position.
     return position
   }
 
+  // No wall has been encountered. Iterate to the next grid boundary and check again.
   return findWall(map, position.add(deltaX, deltaY), deltaX, deltaY)
 }
