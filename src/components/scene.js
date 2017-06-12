@@ -73,8 +73,8 @@ export default class Scene extends React.Component {
               mapHeight={this.props.map.height}
               number={index}
               resolution={this.props.resolution}
-              screenHeight={400}
-              screenWidth={720}
+              screenHeight={this.props.height}
+              screenWidth={this.props.width}
             />
           )
         })}
