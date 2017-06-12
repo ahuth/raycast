@@ -15,7 +15,7 @@ export default function App() {
           map={new Map(64).room()}
           player={new Player(160, 160, 32, fromDegrees(0))}
           height={400}
-          width={720}
+          width={740}
         />
       </Loop>
       <span>Move using the w, s, a, d, ←, and → keys</span>
