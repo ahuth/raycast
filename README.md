@@ -1,6 +1,6 @@
 # Raycast
 
-A raycasting engine in Javascript, using React and HTML. No `<canvas>`, here! Use `w`, `s`, `a`, `d`, `←`, and `→` to move around.
+A raycasting engine in Javascript, using React and HTML. No `<canvas>`, here! [Live demo](https://ahuth.github.io/raycast/).
 
 ![screenshot](https://user-images.githubusercontent.com/2503289/27006798-32a4af54-4df3-11e7-88fb-61e72023e689.gif)
 
