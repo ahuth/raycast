@@ -4,9 +4,8 @@ import Ray from "./ray"
 const stepDistance = 2
 const turnRotation = 0.03
 
-export default function Player(x, y, height, direction) {
+export default function Player(x, y, direction) {
   this.position = new Point(x, y)
-  this.height = height
   this.direction = direction
 }
 
