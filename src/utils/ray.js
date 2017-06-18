@@ -23,7 +23,7 @@ Ray.prototype.cast = function () {
 // Determine the distance travelled before hitting a _horizontal_ wall.
 function castHorizontal(map, origin, angle, up, right) {
   // Calculate the coordinates of the first intersection with a grid boundary.
-  const intersectionY = Math.floor(origin.y / map.height) * map.height + (up ? -1 : map.height)
+  const intersectionY = Math.floor(origin.y / map.height) * map.height + (up ? -0.01 : map.height)
   const intersectionX = origin.x + (origin.y - intersectionY) / Math.tan(angle)
   const intersection = new Point(intersectionX, intersectionY)
   // Calculate the change in x and y coordinates needed to iterate across grid boundaries.
@@ -37,7 +37,7 @@ function castHorizontal(map, origin, angle, up, right) {
 // Determine the distance travelled before hitting a _vertical_ wall.
 function castVertical(map, origin, angle, up, right) {
   // Calculate the coordinates of the first intersection with a grid boundary.
-  const intersectionX = Math.floor(origin.x / map.height) * map.height + (right ? map.height : -1)
+  const intersectionX = Math.floor(origin.x / map.height) * map.height + (right ? map.height : -0.01)
   const intersectionY = origin.y + (origin.x - intersectionX) * Math.tan(angle)
   const intersection = new Point(intersectionX, intersectionY)
   // Calculate the change in x and y coordinates needed to iterate across grid boundaries.
