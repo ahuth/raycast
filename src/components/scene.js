@@ -23,6 +23,7 @@ export default class Scene extends React.Component {
     this.context.loop.subscribe(this.update)
     Mousetrap.bind(["w", "s", "a", "d", "left", "right"], this.handleKeyDown, "keydown")
     Mousetrap.bind(["w", "s", "a", "d", "left", "right"], this.handleKeyUp, "keyup")
+    Mousetrap.bind("c", this.renderScene)
   }
 
   componentDidMount() {
@@ -33,6 +34,7 @@ export default class Scene extends React.Component {
     this.context.loop.unsubscribe(this.update)
     Mousetrap.unbind(["w", "s", "a", "d", "left", "right"], "keydown")
     Mousetrap.unbind(["w", "s", "a", "d", "left", "right"], "keyup")
+    Mousetrap.unbind("c")
   }
 
   update(seconds) {
