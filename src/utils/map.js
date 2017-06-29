@@ -21,7 +21,7 @@ export default function Map(height) {
 
 Map.prototype.isWall = function (point) {
   const gridCoordinates = toGrid(point, this.height)
-  return this.isWithinBounds(gridCoordinates) && this.grid[gridCoordinates.y][gridCoordinates.x] === 1
+  return this.isWithinBounds(point) && this.grid[gridCoordinates.y][gridCoordinates.x] === 1
 }
 
 Map.prototype.isWithinBounds = function (point) {
