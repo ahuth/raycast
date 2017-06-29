@@ -50,16 +50,14 @@ function castVertical(map, origin, angle, up, right) {
 
 // Process each step the ray takes until encountering a wall or the bounds of the map.
 function findWall(map, position, deltaX, deltaY) {
+  // If the ray is no longer within the bounds of the map, return a point infinitely far away.
   if (!map.isWithinBounds(position)) {
-    // This ray is no longer within the bounds of the map. Return a point infinitely far away.
     return new Point(Infinity, Infinity)
   }
-
+  // If the ray has hit a wall, return its position.
   if (map.isWall(position)) {
-    // This ray has hit a wall. Return the position.
     return position
   }
-
   // No wall has been encountered. Iterate to the next grid boundary and check again.
   return findWall(map, position.add(deltaX, deltaY), deltaX, deltaY)
 }
