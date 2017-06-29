@@ -83,6 +83,5 @@ Player.prototype.moveRight = function (map) {
 // Perform collision-detection to determine if a proposed new position for the player is a valid
 // one. If it is, return the proposed delta. Otherwise, return 0.
 function adjustDelta(map, proposed, delta) {
-  const gridCoordinates = proposed.toGrid(map.height)
-  return map.isWall(gridCoordinates) ? 0 : delta
+  return map.isWall(proposed) ? 0 : delta
 }
