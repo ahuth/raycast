@@ -1,10 +1,11 @@
+// @flow
 import Point from "./point"
 import Ray from "./ray"
 
 const stepDistance = 2
 const turnRotation = 0.03
 
-export default function Player(x, y, direction) {
+export default function Player(x: number, y: number, direction: number) {
   this.position = new Point(x, y)
   this.direction = direction
 }
