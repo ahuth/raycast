@@ -4,14 +4,7 @@ import React from "react"
 import Column from "./column"
 
 export default class Scene extends React.Component {
-  constructor(props) {
-    super(props)
-    this.update = this.update.bind(this)
-    this.renderScene = this.renderScene.bind(this)
-    this.handleKeyDown = this.handleKeyDown.bind(this)
-    this.handleKeyUp = this.handleKeyUp.bind(this)
-    this.state = {columns: []}
-  }
+  state = {columns: []}
 
   componentWillMount() {
     this.props.loop.subscribe(this.update)
@@ -29,7 +22,7 @@ export default class Scene extends React.Component {
     Mousetrap.unbind(["w", "s", "a", "d", "left", "right"], "keyup")
   }
 
-  update(seconds) {
+  update = () => {
     if (this.state.w || this.state.s || this.state.a || this.state.d || this.state.ArrowLeft || this.state.ArrowRight) {
       if (this.state.w) { this.props.player.moveForward(this.props.map) }
       if (this.state.s) { this.props.player.moveBackward(this.props.map) }
@@ -41,15 +34,15 @@ export default class Scene extends React.Component {
     }
   }
 
-  handleKeyDown(event) {
+  handleKeyDown = (event) => {
     this.setState({[event.key]: true})
   }
 
-  handleKeyUp(event) {
+  handleKeyUp = (event) => {
     this.setState({[event.key]: false})
   }
 
-  renderScene() {
+  renderScene = () => {
     this.setState({columns: this.props.player.castRays(this.props.map, this.props.fov, this.props.resolution)})
   }
 
