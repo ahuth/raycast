@@ -1,4 +1,5 @@
 import React from "react"
+import Loop from "../utils/loop"
 import Map from "../utils/map"
 import Player from "../utils/player"
 import Scene from "./scene"
@@ -8,6 +9,7 @@ export default function App() {
   return (
     <div>
       <Scene
+        loop={new Loop()}
         resolution={320}
         fov={fromDegrees(60)}
         map={new Map(64)}
