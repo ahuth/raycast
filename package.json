@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "homepage": "https://ahuth.github.io/raycast",
   "dependencies": {
-    "color": "^1.0.3",
+    "color": "^2.0.0",
     "mousetrap": "^1.6.1",
     "prop-types": "^15.5.10",
     "react": "^15.5.4",
