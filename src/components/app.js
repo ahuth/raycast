@@ -1,3 +1,5 @@
+// @flow
+
 import React from "react"
 import Loop from "../utils/loop"
 import Map from "../utils/map"
