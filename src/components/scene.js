@@ -10,7 +10,7 @@ export default class Scene extends React.Component {
     this.renderScene = this.renderScene.bind(this)
     this.handleKeyDown = this.handleKeyDown.bind(this)
     this.handleKeyUp = this.handleKeyUp.bind(this)
-    this.state = {columns: [], keys: {}}
+    this.state = {columns: []}
     this.styles = {
       height: props.height,
       width: props.width,
