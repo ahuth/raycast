@@ -1,7 +1,10 @@
+// @flow
+
 import Point from "./point"
 import {normalize, twoPi} from "./radians"
+import type Map from "./map"
 
-export default function Ray(map, angle, origin) {
+export default function Ray(map: Map, angle: number, origin: Point) {
   this.map = map
   this.origin = origin
   this.angle = normalize(angle)
