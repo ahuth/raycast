@@ -20,7 +20,7 @@ export default class Scene extends React.Component {
   }
 
   update = () => {
-    if (this.state.w || this.state.s || this.state.a || this.state.d || this.state.ArrowLeft || this.state.ArrowRight) {
+    if (this.isPressingKey()) {
       if (this.state.w) { this.props.player.moveForward(this.props.map) }
       if (this.state.s) { this.props.player.moveBackward(this.props.map) }
       if (this.state.a) { this.props.player.moveLeft(this.props.map) }
@@ -37,6 +37,10 @@ export default class Scene extends React.Component {
 
   handleKeyUp = (event) => {
     this.setState({[event.key]: false})
+  }
+
+  isPressingKey = () => {
+    return this.state.w || this.state.s || this.state.a || this.state.d || this.state.ArrowLeft || this.state.ArrowRight
   }
 
   renderScene = () => {
