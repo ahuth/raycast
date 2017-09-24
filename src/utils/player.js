@@ -1,3 +1,5 @@
+// @flow
+
 import Point from "./point"
 import Ray from "./ray"
 

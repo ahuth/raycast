@@ -1,3 +1,5 @@
+// @flow
+
 import PropTypes from "prop-types"
 import Mousetrap from "mousetrap"
 import React from "react"

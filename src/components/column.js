@@ -1,3 +1,5 @@
+// @flow
+
 import Color from "color"
 import PropTypes from "prop-types"
 import React from "react"

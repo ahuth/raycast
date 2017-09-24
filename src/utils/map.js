@@ -1,3 +1,4 @@
+// @flow
 /* eslint-disable no-extend-native */
 
 import Point from "./point"
