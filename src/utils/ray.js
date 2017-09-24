@@ -1,5 +1,3 @@
-// @flow
-
 import Point from "./point"
 import {normalize, twoPi} from "./radians"
 

@@ -1,5 +1,3 @@
-// @flow
-
 export const twoPi = 2 * Math.PI
 
 // Convert degrees to radians.

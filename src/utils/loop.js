@@ -1,5 +1,3 @@
-// @flow
-
 export default function Loop() {
   this.handlers = []
 
