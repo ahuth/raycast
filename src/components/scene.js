@@ -2,6 +2,7 @@ import PropTypes from "prop-types"
 import Mousetrap from "mousetrap"
 import React from "react"
 import Column from "./column"
+import Loop from "../utils/loop"
 
 export default class Scene extends React.Component {
   constructor(props) {
@@ -20,7 +21,8 @@ export default class Scene extends React.Component {
   }
 
   componentWillMount() {
-    this.context.loop.subscribe(this.update)
+    this.loop = new Loop()
+    this.loop.subscribe(this.update)
     Mousetrap.bind(["w", "s", "a", "d", "left", "right"], this.handleKeyDown, "keydown")
     Mousetrap.bind(["w", "s", "a", "d", "left", "right"], this.handleKeyUp, "keyup")
   }
@@ -30,7 +32,7 @@ export default class Scene extends React.Component {
   }
 
   componentWillUnmount() {
-    this.context.loop.unsubscribe(this.update)
+    this.loop.stop()
     Mousetrap.unbind(["w", "s", "a", "d", "left", "right"], "keydown")
     Mousetrap.unbind(["w", "s", "a", "d", "left", "right"], "keyup")
   }
@@ -100,10 +102,6 @@ const styles = {
     bottom: 0,
     top: "50%"
   }
-}
-
-Scene.contextTypes = {
-  loop: PropTypes.object
 }
 
 Scene.propTypes = {
