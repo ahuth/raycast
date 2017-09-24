@@ -6,13 +6,10 @@ import Column from "./column"
 export default class Scene extends React.Component {
   state = {columns: []}
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.loop.subscribe(this.update)
     Mousetrap.bind(["w", "s", "a", "d", "left", "right"], this.handleKeyDown, "keydown")
     Mousetrap.bind(["w", "s", "a", "d", "left", "right"], this.handleKeyUp, "keyup")
-  }
-
-  componentDidMount() {
     this.renderScene()
   }
 
