@@ -11,12 +11,6 @@ export default class Scene extends React.Component {
     this.handleKeyDown = this.handleKeyDown.bind(this)
     this.handleKeyUp = this.handleKeyUp.bind(this)
     this.state = {columns: []}
-    this.styles = {
-      height: props.height,
-      width: props.width,
-      border: "1px solid black",
-      position: "relative"
-    }
   }
 
   componentWillMount() {
@@ -61,7 +55,7 @@ export default class Scene extends React.Component {
 
   render() {
     return (
-      <div style={this.styles}>
+      <div style={{...styles.container, height: this.props.height, width: this.props.width}}>
         <div style={styles.ceiling}></div>
         <div style={styles.floor}></div>
         {this.state.columns.map((ray, index) => {
@@ -84,6 +78,10 @@ export default class Scene extends React.Component {
 }
 
 const styles = {
+  container: {
+    border: "1px solid black",
+    position: "relative"
+  },
   ceiling: {
     backgroundColor: "SlateGrey",
     position: "absolute",
