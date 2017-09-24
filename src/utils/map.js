@@ -1,8 +1,9 @@
+// @flow
 /* eslint-disable no-extend-native */
 
 import Point from "./point"
 
-export default function Map(height) {
+export default function Map(height: number) {
   this.height = height
   this.size = 10
   this.grid = [
