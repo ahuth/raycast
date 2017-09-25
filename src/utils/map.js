@@ -5,7 +5,7 @@ import Point from "./point"
 
 export default class Map {
   height: number
-  size: 10
+  size = 10
   grid = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
