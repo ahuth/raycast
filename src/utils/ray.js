@@ -4,23 +4,29 @@ import Point from "./point"
 import {normalize, twoPi} from "./radians"
 import type Map from "./map"
 
-export default function Ray(map: Map, angle: number, origin: Point) {
-  this.map = map
-  this.origin = origin
-  this.angle = normalize(angle)
-}
+export default class Ray {
+  angle: number
+  map: Map
+  origin: Point
 
-// Determine the distance travelled before hitting a wall.
-Ray.prototype.cast = function () {
-  // Determine the direction the ray is travelling.
-  const up = this.angle > 0 && this.angle < Math.PI
-  const right = this.angle < (twoPi * 0.25) || this.angle > (twoPi * 0.75)
-  // Determine the distance to the first horizontal wall.
-  const horizontalDistance = castHorizontal(this.map, this.origin, this.angle, up, right)
-  // Determine the distance to the first vertical wall.
-  const verticalDistance = castVertical(this.map, this.origin, this.angle, up, right)
-  // Return the shortest distance between the horizontal and vertical distances.
-  return Math.min(horizontalDistance, verticalDistance)
+  constructor(map: Map, angle: number, origin: Point) {
+    this.map = map
+    this.origin = origin
+    this.angle = normalize(angle)
+  }
+
+  // Determine the distance travelled before hitting a wall.
+  cast() {
+    // Determine the direction the ray is travelling.
+    const up = this.angle > 0 && this.angle < Math.PI
+    const right = this.angle < (twoPi * 0.25) || this.angle > (twoPi * 0.75)
+    // Determine the distance to the first horizontal wall.
+    const horizontalDistance = castHorizontal(this.map, this.origin, this.angle, up, right)
+    // Determine the distance to the first vertical wall.
+    const verticalDistance = castVertical(this.map, this.origin, this.angle, up, right)
+    // Return the shortest distance between the horizontal and vertical distances.
+    return Math.min(horizontalDistance, verticalDistance)
+  }
 }
 
 // Determine the distance travelled before hitting a _horizontal_ wall.
