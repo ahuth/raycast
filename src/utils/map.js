@@ -3,10 +3,10 @@
 
 import Point from "./point"
 
-export default function Map(height: number) {
-  this.height = height
-  this.size = 10
-  this.grid = [
+export default class Map {
+  height: number
+  size: 10
+  grid = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 1, 1, 1, 1, 0, 1],
@@ -18,16 +18,20 @@ export default function Map(height: number) {
     [1, 0, 1, 1, 1, 0, 0, 0, 0, 1],
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
   ]
-}
 
-Map.prototype.isWall = function (point) {
-  const gridCoordinates = toGrid(point, this.height)
-  return this.isWithinBounds(point) && this.grid[gridCoordinates.y][gridCoordinates.x] === 1
-}
+  constructor(height: number) {
+    this.height = height
+  }
 
-Map.prototype.isWithinBounds = function (point) {
-  const gridCoordinates = toGrid(point, this.height)
-  return gridCoordinates.x >= 0 && gridCoordinates.x < this.size && gridCoordinates.y >=0 && gridCoordinates.y < this.size
+  isWall(point: Point) {
+    const gridCoordinates = toGrid(point, this.height)
+    return this.isWithinBounds(point) && this.grid[gridCoordinates.y][gridCoordinates.x] === 1
+  }
+
+  isWithinBounds(point: Point) {
+    const gridCoordinates = toGrid(point, this.height)
+    return gridCoordinates.x >= 0 && gridCoordinates.x < this.size && gridCoordinates.y >=0 && gridCoordinates.y < this.size
+  }
 }
 
 // Convert unit coordinates to grid coordinates. Each grid coordinate can be broken up into

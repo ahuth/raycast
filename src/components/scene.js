@@ -1,10 +1,34 @@
-import PropTypes from "prop-types"
+// @flow
+
 import Mousetrap from "mousetrap"
 import React from "react"
 import Column from "./column"
+import type Loop from "../utils/loop"
+import type Map from "../utils/map"
+import type Player from "../utils/player"
 
-export default class Scene extends React.Component {
-  state = {columns: []}
+type Props = {
+  loop: Loop,
+  resolution: number,
+  fov: number,
+  map: Map,
+  player: Player,
+  height: number,
+  width: number,
+}
+
+type State = {
+  columns: Array<number>,
+  w?: boolean,
+  s?: boolean,
+  a?: boolean,
+  d?: boolean,
+  ArrowLeft?: boolean,
+  ArrowRight?: boolean,
+}
+
+export default class Scene extends React.Component<Props, State> {
+  state = {columns: [], ArrowLeft: false, ArrowRight: false}
 
   componentDidMount() {
     this.props.loop.subscribe(this.update)
@@ -31,11 +55,11 @@ export default class Scene extends React.Component {
     }
   }
 
-  handleKeyDown = (event) => {
+  handleKeyDown = (event: SyntheticKeyboardEvent<>) => {
     this.setState({[event.key]: true})
   }
 
-  handleKeyUp = (event) => {
+  handleKeyUp = (event: SyntheticKeyboardEvent<>) => {
     this.setState({[event.key]: false})
   }
 
@@ -92,14 +116,4 @@ const styles = {
     bottom: 0,
     top: "50%"
   }
-}
-
-Scene.propTypes = {
-  loop: PropTypes.object.isRequired,
-  resolution: PropTypes.number.isRequired,
-  fov: PropTypes.number.isRequired,
-  map: PropTypes.object.isRequired,
-  player: PropTypes.object.isRequired,
-  height: PropTypes.number.isRequired,
-  width: PropTypes.number.isRequired
 }
