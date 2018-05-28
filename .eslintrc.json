@@ -3,6 +3,7 @@
     "browser": true
   },
   "extends": "airbnb",
+  "parser": "babel-eslint",
   "rules": {
     "func-names": "off",
     "max-len": "off",
