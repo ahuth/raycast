@@ -1,4 +1,3 @@
-import PropTypes from "prop-types"
 import Mousetrap from "mousetrap"
 import React from "react"
 import Column from "./column"
@@ -92,14 +91,4 @@ const styles = {
     bottom: 0,
     top: "50%"
   }
-}
-
-Scene.propTypes = {
-  loop: PropTypes.object.isRequired,
-  resolution: PropTypes.number.isRequired,
-  fov: PropTypes.number.isRequired,
-  map: PropTypes.object.isRequired,
-  player: PropTypes.object.isRequired,
-  height: PropTypes.number.isRequired,
-  width: PropTypes.number.isRequired
 }

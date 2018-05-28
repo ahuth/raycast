@@ -1,5 +1,4 @@
 import Color from "color"
-import PropTypes from "prop-types"
 import React from "react"
 
 export default function Column({color, distance, mapHeight, number, resolution, screenHeight, screenWidth}) {
@@ -16,14 +15,4 @@ export default function Column({color, distance, mapHeight, number, resolution, 
     top: top
   }
   return <div style={styles}></div>
-}
-
-Column.propTypes = {
-  color: PropTypes.string.isRequired,
-  distance: PropTypes.number.isRequired,
-  mapHeight: PropTypes.number.isRequired,
-  number: PropTypes.number.isRequired,
-  resolution: PropTypes.number.isRequired,
-  screenHeight: PropTypes.number.isRequired,
-  screenWidth: PropTypes.number.isRequired
 }
