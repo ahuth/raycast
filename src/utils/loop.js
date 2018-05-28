@@ -1,23 +1,23 @@
 export default function Loop() {
-  this.handlers = []
+  this.handlers = [];
 
   const tick = () => {
-    this.handlers.forEach(handler => handler())
-    this.request = window.requestAnimationFrame(tick)
-  }
+    this.handlers.forEach(handler => handler());
+    this.request = window.requestAnimationFrame(tick);
+  };
 
-  window.requestAnimationFrame(tick)
+  window.requestAnimationFrame(tick);
 }
 
 Loop.prototype.subscribe = function (callback) {
-  this.handlers.push(callback)
-}
+  this.handlers.push(callback);
+};
 
 Loop.prototype.unsubscribe = function (callback) {
-  this.handlers.filter(handler => handler !== callback)
-}
+  this.handlers.filter(handler => handler !== callback);
+};
 
-Loop.prototype.stop = function() {
-  this.handlers.forEach(handler => this.unsubscribe(handler))
-  window.cancelAnimationFrame(this.request)
-}
+Loop.prototype.stop = function () {
+  this.handlers.forEach(handler => this.unsubscribe(handler));
+  window.cancelAnimationFrame(this.request);
+};
