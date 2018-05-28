@@ -1,9 +1,9 @@
-import React from "react"
-import Loop from "../utils/loop"
-import Map from "../utils/map"
-import Player from "../utils/player"
-import Scene from "./scene"
-import {fromDegrees} from "../utils/radians"
+import React from 'react';
+import Loop from '../utils/loop';
+import Map from '../utils/map';
+import Player from '../utils/player';
+import Scene from './scene';
+import { fromDegrees } from '../utils/radians';
 
 export default function App() {
   return (
@@ -19,5 +19,5 @@ export default function App() {
       />
       <span>Move using the w, s, a, d, ←, and → keys</span>
     </div>
-  )
+  );
 }
