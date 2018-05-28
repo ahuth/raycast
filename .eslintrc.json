@@ -1,12 +1,12 @@
 {
-    "env": {
-      "browser": true
-    },
-    "extends": "airbnb",
-    "rules": {
-      "func-names": "off",
-      "max-len": "off",
-      "no-mixed-operators": "off",
-      "no-use-before-define": "off"
-    }
+  "env": {
+    "browser": true
+  },
+  "extends": "airbnb",
+  "rules": {
+    "func-names": "off",
+    "max-len": "off",
+    "no-mixed-operators": "off",
+    "no-use-before-define": "off"
+  }
 }
