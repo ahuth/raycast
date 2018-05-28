@@ -8,6 +8,7 @@
     "func-names": "off",
     "max-len": "off",
     "no-mixed-operators": "off",
-    "no-use-before-define": "off"
+    "no-use-before-define": "off",
+    "react/prop-types": "off"
   }
 }
