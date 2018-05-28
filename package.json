@@ -4,14 +4,14 @@
   "homepage": "https://ahuth.github.io/raycast",
   "license": "MIT",
   "dependencies": {
-    "color": "^2.0.0",
+    "color": "^3.0.0",
     "mousetrap": "^1.6.1",
-    "prop-types": "^15.6.0",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0"
+    "prop-types": "^15.6.1",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0"
   },
   "devDependencies": {
-    "gh-pages": "^1.0.0",
+    "gh-pages": "^1.1.0",
     "react-scripts": "^1.0.14"
   },
   "scripts": {
