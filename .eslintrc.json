@@ -2,7 +2,7 @@
     "env": {
       "browser": true
     },
-    "extends": "airbnb-base",
+    "extends": "airbnb",
     "rules": {
       "func-names": "off",
       "max-len": "off",
