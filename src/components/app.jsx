@@ -14,7 +14,7 @@ const player = new Player(160, 160, fromDegrees(0));
 export default function App() {
   return (
     <div style={styles.container}>
-      <div style={styles.left}>
+      <div>
         <Scene
           fov={fov}
           loop={loop}
@@ -26,14 +26,12 @@ export default function App() {
         />
         <span>Move using the w, s, a, d, ←, and → keys</span>
       </div>
-      <div style={styles.right}>
-        <Minimap
-          loop={loop}
-          map={map}
-          player={player}
-          size={300}
-        />
-      </div>
+      <Minimap
+        loop={loop}
+        map={map}
+        player={player}
+        size={300}
+      />
     </div>
   );
 }
