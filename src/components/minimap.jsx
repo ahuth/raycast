@@ -16,6 +16,8 @@ export default class Minimap extends React.Component {
     const { map, size } = this.props;
     const cellSize = size / map.size;
 
+    context.fillStyle = 'blue';
+
     map.grid.forEach((row, y) => {
       row.forEach((cell, x) => {
         if (cell === 1) {
