@@ -28,16 +28,27 @@ export default class Minimap extends React.Component {
   drawPlayer() {
     const context = this.playerRef.current.getContext('2d');
     const { map, player, size } = this.props;
-    const { position } = player;
+    const { direction, position } = player;
     const gridX = position.x / map.height;
     const gridY = position.y / map.height;
     const cellSize = size / map.size;
+    const minimapX = gridX * cellSize;
+    const minimapY = gridY * cellSize;
 
     context.clearRect(0, 0, size, size);
+
+    // Draw the player's position.
     context.fillStyle = 'green';
     context.beginPath();
-    context.arc(gridX * cellSize, gridY * cellSize, 5, 0, twoPi);
+    context.arc(minimapX, minimapY, 5, 0, twoPi);
     context.fill();
+
+    // Draw a line indicating the direction the player is looking.
+    context.strokeStyle = 'green';
+    context.lineWidth = 2;
+    context.moveTo(minimapX, minimapY);
+    context.lineTo(minimapX + 12 * Math.cos(direction), minimapY + 12 * -Math.sin(direction));
+    context.stroke();
   }
 
   update = () => {
