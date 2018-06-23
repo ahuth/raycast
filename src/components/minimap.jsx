@@ -1,4 +1,5 @@
 import React from 'react';
+import { twoPi } from '../utils/radians';
 
 export default class Minimap extends React.Component {
   wallsRef = React.createRef()
@@ -7,6 +8,7 @@ export default class Minimap extends React.Component {
   componentDidMount() {
     this.drawWalls();
     this.drawPlayer();
+    this.props.loop.subscribe(this.update);
   }
 
   drawWalls() {
@@ -33,7 +35,13 @@ export default class Minimap extends React.Component {
 
     context.clearRect(0, 0, size, size);
     context.fillStyle = 'green';
-    context.fillRect(gridX * cellSize, gridY * cellSize, 10, 10);
+    context.beginPath();
+    context.arc(gridX * cellSize, gridY * cellSize, 5, 0, twoPi);
+    context.fill();
+  }
+
+  update = () => {
+    this.drawPlayer();
   }
 
   render() {
