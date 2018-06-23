@@ -28,7 +28,6 @@ export default function App() {
       </div>
       <div style={styles.right}>
         <Minimap
-          fov={fov}
           loop={loop}
           map={map}
           player={player}
