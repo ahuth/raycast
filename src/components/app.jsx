@@ -29,7 +29,7 @@ export default function App() {
             <span>Move using the w, s, a, d, ←, and → keys</span>
           </div>
           <Minimap
-            loop={loop}
+            columns={columns}
             map={map}
             player={player}
             size={300}

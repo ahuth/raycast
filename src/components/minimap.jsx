@@ -8,7 +8,6 @@ export default class Minimap extends React.Component {
   componentDidMount() {
     this.drawWalls();
     this.drawPlayer();
-    this.props.loop.subscribe(this.update);
   }
 
   drawWalls() {
@@ -53,8 +52,10 @@ export default class Minimap extends React.Component {
     context.stroke();
   }
 
-  update = () => {
-    this.drawPlayer();
+  componentDidUpdate(prevProps) {
+    if (prevProps.columns !== this.props.columns) {
+      this.drawPlayer();
+    }
   }
 
   render() {
