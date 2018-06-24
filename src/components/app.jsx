@@ -30,8 +30,10 @@ export default function App() {
           </div>
           <Minimap
             columns={columns}
+            fov={fov}
             map={map}
             player={player}
+            resolution={resolution}
             size={300}
           />
         </div>
