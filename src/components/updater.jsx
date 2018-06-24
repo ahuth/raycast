@@ -17,14 +17,14 @@ export default class Updater extends React.Component {
     Mousetrap.unbind(['w', 's', 'a', 'd', 'left', 'right'], 'keyup');
   }
 
-  update = () => {
+  update = (elapsed) => {
     if (this.isPressingKey()) {
-      if (this.state.w) { this.props.player.moveForward(this.props.map); }
-      if (this.state.s) { this.props.player.moveBackward(this.props.map); }
-      if (this.state.a) { this.props.player.moveLeft(this.props.map); }
-      if (this.state.d) { this.props.player.moveRight(this.props.map); }
-      if (this.state.ArrowLeft) { this.props.player.turnLeft(); }
-      if (this.state.ArrowRight) { this.props.player.turnRight(); }
+      if (this.state.w) { this.props.player.moveForward(this.props.map, elapsed); }
+      if (this.state.s) { this.props.player.moveBackward(this.props.map, elapsed); }
+      if (this.state.a) { this.props.player.moveLeft(this.props.map, elapsed); }
+      if (this.state.d) { this.props.player.moveRight(this.props.map, elapsed); }
+      if (this.state.ArrowLeft) { this.props.player.turnLeft(elapsed); }
+      if (this.state.ArrowRight) { this.props.player.turnRight(elapsed); }
       this.computeRays();
     }
   }
