@@ -1,9 +1,11 @@
 export default function Loop() {
   this.handlers = [];
+  this.prev = window.performance.now();
 
-  const tick = () => {
-    this.handlers.forEach(handler => handler());
+  const tick = (timestamp) => {
+    this.handlers.forEach(handler => handler(timestamp - this.prev));
     this.request = window.requestAnimationFrame(tick);
+    this.prev = timestamp;
   };
 
   window.requestAnimationFrame(tick);

@@ -1,8 +1,8 @@
 import Point from './point';
 import Ray from './ray';
 
-const stepDistance = 2;
-const turnRotation = 0.03;
+const stepDistance = 1.4; // per 16ms
+const turnRotation = 0.025; // per 16ms
 
 export default function Player(x, y, direction) {
   this.position = new Point(x, y);
@@ -29,17 +29,17 @@ Player.prototype.castRays = function (map, fov, resolution) {
   return rayAngles.map(angle => new Ray(map, angle, this.position));
 };
 
-Player.prototype.turnRight = function () {
-  this.direction -= turnRotation;
+Player.prototype.turnRight = function (elapsed) {
+  this.direction -= turnRotation * elapsed / 16;
 };
 
-Player.prototype.turnLeft = function () {
-  this.direction += turnRotation;
+Player.prototype.turnLeft = function (elapsed) {
+  this.direction += turnRotation * elapsed / 16;
 };
 
-Player.prototype.moveForward = function (map) {
-  const deltaX = stepDistance * Math.cos(this.direction);
-  const deltaY = stepDistance * Math.sin(this.direction);
+Player.prototype.moveForward = function (map, elapsed) {
+  const deltaX = stepDistance * (elapsed / 16) * Math.cos(this.direction);
+  const deltaY = stepDistance * (elapsed / 16) * Math.sin(this.direction);
 
   this.position = this.position.add(
     adjustDelta(map, this.position.add(deltaX, 0), deltaX),
@@ -47,9 +47,9 @@ Player.prototype.moveForward = function (map) {
   );
 };
 
-Player.prototype.moveBackward = function (map) {
-  const deltaX = stepDistance * Math.cos(this.direction);
-  const deltaY = stepDistance * Math.sin(this.direction);
+Player.prototype.moveBackward = function (map, elapsed) {
+  const deltaX = stepDistance * (elapsed / 16) * Math.cos(this.direction);
+  const deltaY = stepDistance * (elapsed / 16) * Math.sin(this.direction);
 
   this.position = this.position.add(
     adjustDelta(map, this.position.add(-deltaX, 0), -deltaX),
@@ -58,9 +58,9 @@ Player.prototype.moveBackward = function (map) {
 };
 
 // Step to the left, which is the same as stepping forward but rotated 90 degrees to the left.
-Player.prototype.moveLeft = function (map) {
-  const deltaX = stepDistance * Math.cos(this.direction + Math.PI / 2);
-  const deltaY = stepDistance * Math.sin(this.direction + Math.PI / 2);
+Player.prototype.moveLeft = function (map, elapsed) {
+  const deltaX = stepDistance * (elapsed / 16) * Math.cos(this.direction + Math.PI / 2);
+  const deltaY = stepDistance * (elapsed / 16) * Math.sin(this.direction + Math.PI / 2);
 
   this.position = this.position.add(
     adjustDelta(map, this.position.add(deltaX, 0), deltaX),
@@ -69,9 +69,9 @@ Player.prototype.moveLeft = function (map) {
 };
 
 // Step to the right, which is the same as stepping backward but rotated 90 degrees to the left.
-Player.prototype.moveRight = function (map) {
-  const deltaX = stepDistance * Math.cos(this.direction + Math.PI / 2);
-  const deltaY = stepDistance * Math.sin(this.direction + Math.PI / 2);
+Player.prototype.moveRight = function (map, elapsed) {
+  const deltaX = stepDistance * (elapsed / 16) * Math.cos(this.direction + Math.PI / 2);
+  const deltaY = stepDistance * (elapsed / 16) * Math.sin(this.direction + Math.PI / 2);
 
   this.position = this.position.add(
     adjustDelta(map, this.position.add(-deltaX, 0), -deltaX),
