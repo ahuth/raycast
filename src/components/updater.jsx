@@ -2,13 +2,13 @@ import Mousetrap from 'mousetrap';
 import React from 'react';
 
 export default class Updater extends React.Component {
-  state = { columns: [] };
+  state = { rays: [] };
 
   componentDidMount() {
     this.props.loop.subscribe(this.update);
     Mousetrap.bind(['w', 's', 'a', 'd', 'left', 'right'], this.handleKeyDown, 'keydown');
     Mousetrap.bind(['w', 's', 'a', 'd', 'left', 'right'], this.handleKeyUp, 'keyup');
-    this.computeColumns();
+    this.computeRays();
   }
 
   componentWillUnmount() {
@@ -25,7 +25,7 @@ export default class Updater extends React.Component {
       if (this.state.d) { this.props.player.moveRight(this.props.map); }
       if (this.state.ArrowLeft) { this.props.player.turnLeft(); }
       if (this.state.ArrowRight) { this.props.player.turnRight(); }
-      this.computeColumns();
+      this.computeRays();
     }
   }
 
@@ -39,11 +39,11 @@ export default class Updater extends React.Component {
 
   isPressingKey = () => this.state.w || this.state.s || this.state.a || this.state.d || this.state.ArrowLeft || this.state.ArrowRight
 
-  computeColumns = () => {
-    this.setState({ columns: this.props.player.castRays(this.props.map, this.props.fov, this.props.resolution) });
+  computeRays = () => {
+    this.setState({ rays: this.props.player.castRays(this.props.map, this.props.fov, this.props.resolution) });
   }
 
   render() {
-    return this.props.children({ columns: this.state.columns });
+    return this.props.children({ rays: this.state.rays });
   }
 }

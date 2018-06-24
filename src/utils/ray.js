@@ -5,23 +5,24 @@ export default function Ray(map, angle, origin) {
   this.map = map;
   this.origin = origin;
   this.angle = normalize(angle);
+  this.distance = cast(map, this.angle, origin);
 }
 
 // Determine the distance travelled before hitting a wall.
-Ray.prototype.cast = function () {
+function cast(map, angle, origin) {
   // Determine the direction the ray is travelling.
-  const up = this.angle > 0 && this.angle < Math.PI;
-  const right = this.angle < (twoPi * 0.25) || this.angle > (twoPi * 0.75);
+  const up = angle > 0 && angle < Math.PI;
+  const right = angle < (twoPi * 0.25) || angle > (twoPi * 0.75);
 
   // Determine the distance to the first horizontal wall.
-  const horizontalDistance = castHorizontal(this.map, this.origin, this.angle, up, right);
+  const horizontalDistance = castHorizontal(map, origin, angle, up, right);
 
   // Determine the distance to the first vertical wall.
-  const verticalDistance = castVertical(this.map, this.origin, this.angle, up, right);
+  const verticalDistance = castVertical(map, origin, angle, up, right);
 
   // Return the shortest distance between the horizontal and vertical distances.
   return Math.min(horizontalDistance, verticalDistance);
-};
+}
 
 // Determine the distance travelled before hitting a _horizontal_ wall.
 function castHorizontal(map, origin, angle, up, right) {

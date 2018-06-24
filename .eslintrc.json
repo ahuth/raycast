@@ -9,6 +9,7 @@
     "max-len": "off",
     "no-mixed-operators": "off",
     "no-use-before-define": "off",
+    "object-curly-newline": "off",
     "react/prop-types": "off",
     "react/sort-comp": "off"
   }

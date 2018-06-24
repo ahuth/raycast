@@ -47,36 +47,30 @@ export default class Minimap extends React.Component {
 
   drawRays() {
     const context = this.raysRef.current.getContext('2d');
-    const { map, player, size } = this.props;
-    const { position } = player;
-    const gridX = position.x / map.height;
-    const gridY = position.y / map.height;
+    const { map, rays, size } = this.props;
     const cellSize = size / map.size;
-    const minimapX = gridX * cellSize;
-    const minimapY = gridY * cellSize;
-    const rayAngles = player.rayAngles(map, this.props.fov, this.props.resolution);
 
     context.clearRect(0, 0, size, size);
     context.beginPath();
     context.strokeStyle = 'green';
 
-    for (let i = 0; i < rayAngles.length; i += 16) {
-      const gridDistance = this.props.columns[i] / map.height;
-      const distance = (size / map.size) * gridDistance;
+    for (let i = 0; i < rays.length; i += 16) {
+      const { angle, distance, origin } = rays[i];
+      const gridX = origin.x / map.height;
+      const gridY = origin.y / map.height;
+      const gridDistance = distance / map.height;
+      const minimapX = gridX * cellSize;
+      const minimapY = gridY * cellSize;
+      const mapDistance = (size / map.size) * gridDistance;
 
-      // Unadjust for the correction for a fishbowl effect while casting rays. This is the downside
-      // of mixing polar and cartesian coordinates.
-      const adjustedDistance = distance / Math.cos(rayAngles[i] - player.direction);
-
-      const direction = rayAngles[i];
       context.moveTo(minimapX, minimapY);
-      context.lineTo(minimapX + adjustedDistance * Math.cos(direction), minimapY + adjustedDistance * -Math.sin(direction));
+      context.lineTo(minimapX + mapDistance * Math.cos(angle), minimapY + mapDistance * -Math.sin(angle));
       context.stroke();
     }
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.columns !== this.props.columns) {
+    if (prevProps.rays !== this.props.rays) {
       this.drawPlayer();
       this.drawRays();
     }

@@ -2,9 +2,10 @@ import React from 'react';
 import Column from './column';
 
 export default function Scene({
-  columns,
   height,
   mapHeight,
+  player,
+  rays,
   resolution,
   width,
 }) {
@@ -12,10 +13,10 @@ export default function Scene({
     <div style={{ ...styles.container, height, width }}>
       <div style={styles.ceiling} />
       <div style={styles.floor} />
-      {columns.map((ray, index) => (
+      {rays.map((ray, index) => (
         <Column
           color="#0000FF"
-          distance={ray}
+          distance={adjustDistance(ray, player)}
           key={index} // eslint-disable-line react/no-array-index-key
           mapHeight={mapHeight}
           number={index}
@@ -26,6 +27,11 @@ export default function Scene({
       ))}
     </div>
   );
+}
+
+// Correct for a fishbowl-effect resulting from mixing polar and cartesian coordinates.
+function adjustDistance(ray, player) {
+  return ray.distance * Math.cos(ray.angle - player.direction);
 }
 
 const styles = {
