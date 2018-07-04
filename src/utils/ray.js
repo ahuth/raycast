@@ -2,7 +2,6 @@ import Point from './point';
 import { normalize, twoPi } from './radians';
 
 export default function Ray(map, angle, origin) {
-  this.map = map;
   this.origin = origin;
   this.angle = normalize(angle);
   this.distance = cast(map, this.angle, origin);
