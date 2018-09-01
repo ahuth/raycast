@@ -37,12 +37,15 @@ export default class App extends React.Component {
                 resolution={resolution}
                 width={740}
               />
-              <span>Move using the w, s, a, d, ←, and → keys</span>
               <div>
-                <label htmlFor="show_minimap">
-                  Show minimap
-                  <input id="show_minimap" onChange={this.handleMinimapChange} type="checkbox" checked={showMinimap} />
-                </label>
+                <span>Move using the w, s, a, d, ←, and → keys</span>
+                <div>
+                  <label htmlFor="show_minimap">
+                    Show minimap
+                    <input id="show_minimap" onChange={this.handleMinimapChange} type="checkbox" checked={showMinimap} />
+                  </label>
+                </div>
+                <a href="https://github.com/ahuth/raycast">Source code</a>
               </div>
             </div>
             {showMinimap && (
