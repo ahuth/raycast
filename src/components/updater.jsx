@@ -1,20 +1,16 @@
-import Mousetrap from 'mousetrap';
 import React from 'react';
+import KeyListener from './key-listener';
 
 export default class Updater extends React.Component {
   state = { rays: [] };
 
   componentDidMount() {
     this.props.loop.subscribe(this.update);
-    Mousetrap.bind(['w', 's', 'a', 'd', 'left', 'right'], this.handleKeyDown, 'keydown');
-    Mousetrap.bind(['w', 's', 'a', 'd', 'left', 'right'], this.handleKeyUp, 'keyup');
     this.computeRays();
   }
 
   componentWillUnmount() {
     this.props.loop.stop();
-    Mousetrap.unbind(['w', 's', 'a', 'd', 'left', 'right'], 'keydown');
-    Mousetrap.unbind(['w', 's', 'a', 'd', 'left', 'right'], 'keyup');
   }
 
   update = (elapsed) => {
@@ -44,6 +40,13 @@ export default class Updater extends React.Component {
   }
 
   render() {
-    return this.props.children({ rays: this.state.rays });
+    return (
+      <KeyListener
+        onKeyDown={this.handleKeyDown}
+        onKeyUp={this.handleKeyUp}
+      >
+        {this.props.children({ rays: this.state.rays })}
+      </KeyListener>
+    );
   }
 }
