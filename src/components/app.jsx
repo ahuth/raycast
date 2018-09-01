@@ -15,7 +15,7 @@ const player = new Player(160, 160, fromDegrees(0));
 const resolution = 320;
 
 export default class App extends React.Component {
-  state = { showMinimap: false }
+  state = { showMinimap: true }
 
   handleMinimapChange = () => {
     this.setState(toggleMinimap);
@@ -41,7 +41,7 @@ export default class App extends React.Component {
               <div>
                 <label htmlFor="show_minimap">
                   Show minimap
-                  <input id="show_minimap" onChange={this.handleMinimapChange} type="checkbox" value={showMinimap} />
+                  <input id="show_minimap" onChange={this.handleMinimapChange} type="checkbox" checked={showMinimap} />
                 </label>
               </div>
             </div>
