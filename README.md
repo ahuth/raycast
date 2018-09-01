@@ -7,8 +7,8 @@ A raycasting engine in Javascript, using React and HTML. No `<canvas>`, here! [L
 ## Setup
 
 1. Clone the repo with `git clone git@github.com:ahuth/raycast.git`
-2. Install dependencies with `npm install`
-3. Start with `npm start`
+2. Install dependencies with `yarn install`
+3. Start with `yarn start`
 
 ## References
 - [Ray-Casting Tutorial For Game Development And Other Purposes](http://permadi.com/1996/05/ray-casting-tutorial-table-of-contents/), by F. Permadi
