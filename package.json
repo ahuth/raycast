@@ -5,9 +5,9 @@
   "license": "MIT",
   "dependencies": {
     "color": "^3.0.0",
-    "mousetrap": "^1.6.1",
-    "react": "^16.4.0",
-    "react-dom": "^16.4.0"
+    "mousetrap": "^1.6.2",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.3",
