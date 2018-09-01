@@ -5,6 +5,7 @@
   "extends": "airbnb",
   "parser": "babel-eslint",
   "rules": {
+    "arrow-body-style": "off",
     "func-names": "off",
     "max-len": "off",
     "no-use-before-define": "off",

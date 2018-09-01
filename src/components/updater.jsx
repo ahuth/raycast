@@ -33,10 +33,18 @@ export default class Updater extends React.Component {
     this.setState({ [event.key]: false });
   }
 
-  isPressingKey = () => this.state.w || this.state.s || this.state.a || this.state.d || this.state.ArrowLeft || this.state.ArrowRight
+  isPressingKey = () => {
+    return this.state.w
+      || this.state.s
+      || this.state.a
+      || this.state.d
+      || this.state.ArrowLeft
+      || this.state.ArrowRight;
+  }
 
   computeRays = () => {
-    this.setState({ rays: this.props.player.castRays(this.props.map, this.props.fov, this.props.resolution) });
+    const rays = this.props.player.castRays(this.props.map, this.props.fov, this.props.resolution);
+    this.setState({ rays });
   }
 
   render() {
