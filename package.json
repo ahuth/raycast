@@ -10,6 +10,7 @@
     "react-dom": "^16.8.6"
   },
   "devDependencies": {
+    "eslint-plugin-react-hooks": "^1.6.0",
     "gh-pages": "^2.0.1",
     "react-scripts": "^3.0.0"
   },
@@ -22,6 +23,17 @@
     "deploy": "gh-pages -d build",
     "lint": "eslint --ext .jsx --ext .js src"
   },
+  "eslintConfig": {
+    "extends": "react-app",
+    "plugins": [
+      "react-hooks"
+    ],
+    "rules": {
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn"
+    }
+  },
+
   "browserslist": {
     "production": [
       ">0.2%",
