@@ -4,9 +4,9 @@
   "homepage": "https://ahuth.github.io/raycast",
   "license": "MIT",
   "dependencies": {
-    "color": "^3.0.0",
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2"
+    "color": "^3.1.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   },
   "devDependencies": {
     "babel-eslint": "^9.0.0",
