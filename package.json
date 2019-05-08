@@ -1,6 +1,7 @@
 {
   "name": "raycast",
-  "version": "0.1.0",
+  "version": "2.0.0",
+  "private": true,
   "homepage": "https://ahuth.github.io/raycast",
   "license": "MIT",
   "dependencies": {
