@@ -3,20 +3,20 @@ import { useEffect, useRef } from 'react';
 export default function useAnimationFrame(callback) {
   const callbackRef = useRef(callback);
   const frameRef = useRef();
-  let prev;
+  const timestampRef = useRef();
 
   useEffect(() => {
-    prev = window.performance.now();
+    timestampRef.current = window.performance.now();
     callbackRef.current = callback;
   }, [callback]);
 
-  function loop(timestamp) {
-    frameRef.current = requestAnimationFrame(loop);
-    callbackRef.current(timestamp - prev);
-    prev = timestamp;
-  };
-
   useEffect(() => {
+    function loop(timestamp) {
+      frameRef.current = requestAnimationFrame(loop);
+      callbackRef.current(timestamp - timestampRef.current);
+      timestampRef.current = timestamp;
+    };
+
     frameRef.current = requestAnimationFrame(loop);
     return () => cancelAnimationFrame(frameRef.current);
   }, []);

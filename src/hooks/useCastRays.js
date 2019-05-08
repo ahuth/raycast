@@ -1,28 +1,28 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import useKeyPressing from './useKeyPressing';
 
 export default function useCastRays(player, map, fov, resolution) {
   const [rays, setRays] = useState([]);
 
-  function computeRays() {
+  const castRays = useCallback(() => {
     const newRays = player.castRays(map, fov, resolution);
     setRays(newRays);
-  }
+  }, [player, map, fov, resolution]);
 
   useEffect(() => {
-    computeRays();
-  }, [player, map, fov, resolution, computeRays]);
+    castRays();
+  }, [player, map, fov, resolution, castRays]);
 
   useKeyPressing(useMemo(() => {
     return {
-      w: (elapsed) => { player.moveForward(map, elapsed); computeRays(); },
-      s: (elapsed) => { player.moveBackward(map, elapsed); computeRays(); },
-      a: (elapsed) => { player.moveLeft(map, elapsed); computeRays(); },
-      d: (elapsed) => { player.moveRight(map, elapsed); computeRays(); },
-      ArrowLeft: (elapsed) => { player.turnLeft(elapsed); computeRays(); },
-      ArrowRight: (elapsed) => { player.turnRight(elapsed); computeRays(); },
+      w: (elapsed) => { player.moveForward(map, elapsed); castRays(); },
+      s: (elapsed) => { player.moveBackward(map, elapsed); castRays(); },
+      a: (elapsed) => { player.moveLeft(map, elapsed); castRays(); },
+      d: (elapsed) => { player.moveRight(map, elapsed); castRays(); },
+      ArrowLeft: (elapsed) => { player.turnLeft(elapsed); castRays(); },
+      ArrowRight: (elapsed) => { player.turnRight(elapsed); castRays(); },
     };
-  }, [player, map]));
+  }, [player, map, castRays]));
 
   return rays;
 }
