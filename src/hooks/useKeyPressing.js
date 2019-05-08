@@ -1,4 +1,4 @@
-import forEach from 'lodash.forEach';
+import forEach from 'lodash.foreach';
 import { useEffect, useState } from 'react';
 import useAnimationFrame from './useAnimationFrame';
 
