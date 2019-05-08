@@ -13,16 +13,22 @@ export default function useCastRays(player, map, fov, resolution) {
     castRays();
   }, [player, map, fov, resolution, castRays]);
 
-  useKeyPressing(useMemo(() => {
-    return {
-      w: (elapsed) => { player.moveForward(map, elapsed); castRays(); },
-      s: (elapsed) => { player.moveBackward(map, elapsed); castRays(); },
-      a: (elapsed) => { player.moveLeft(map, elapsed); castRays(); },
-      d: (elapsed) => { player.moveRight(map, elapsed); castRays(); },
-      ArrowLeft: (elapsed) => { player.turnLeft(elapsed); castRays(); },
-      ArrowRight: (elapsed) => { player.turnRight(elapsed); castRays(); },
-    };
-  }, [player, map, castRays]));
+  useKeyPressing(
+    useMemo(
+      () => {
+        return {
+          w: (elapsed) => { player.moveForward(map, elapsed); },
+          s: (elapsed) => { player.moveBackward(map, elapsed); },
+          a: (elapsed) => { player.moveLeft(map, elapsed); },
+          d: (elapsed) => { player.moveRight(map, elapsed); },
+          ArrowLeft: (elapsed) => { player.turnLeft(elapsed); },
+          ArrowRight: (elapsed) => { player.turnRight(elapsed); },
+        };
+      },
+      [player, map],
+    ),
+    { andThen: castRays },
+  );
 
   return rays;
 }

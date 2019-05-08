@@ -13,16 +13,21 @@ function reducer(state, action) {
   }
 }
 
-export default function useKeyPressing(handlers) {
+export default function useKeyPressing(handlers, { andThen = () => {} }) {
   const [state, dispatch] = useReducer(reducer, {});
 
   useAnimationFrame((elapsed) => {
+    let isPressingKey = false;
+
     // Execute the handler for all keys that are being pressed.
     forEach(handlers, (value, key) => {
       if (state[key]) {
+        isPressingKey = true;
         value(elapsed);
       }
     });
+
+    if (isPressingKey) { andThen() }
   });
 
   useEffect(() => {
