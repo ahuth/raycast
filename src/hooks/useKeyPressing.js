@@ -1,14 +1,25 @@
 import forEach from 'lodash.foreach';
-import { useEffect, useState } from 'react';
+import { useEffect, useReducer } from 'react';
 import useAnimationFrame from './useAnimationFrame';
 
+function reducer(state, action) {
+  switch (action.type) {
+    case 'down':
+      return { ...state, [action.key]: true };
+    case 'up':
+      return { ...state, [action.key]: false };
+    default:
+      return state;
+  }
+}
+
 export default function useKeyPressing(handlers) {
-  const [keys, setKeys] = useState({});
+  const [state, dispatch] = useReducer(reducer, {});
 
   useAnimationFrame((elapsed) => {
     // Execute the handler for all keys that are being pressed.
     forEach(handlers, (value, key) => {
-      if (keys[key]) {
+      if (state[key]) {
         value(elapsed);
       }
     });
@@ -19,13 +30,15 @@ export default function useKeyPressing(handlers) {
 
     function handleKeyDown(event) {
       if (keyNames.includes(event.key)) {
-        setKeys(state => ({ ...state, [event.key]: true }));
+        // setKeys(state => ({ ...state, [event.key]: true }));
+        dispatch({ type: 'down', key: event.key });
       }
     }
 
     function handleKeyUp(event) {
       if (keyNames.includes(event.key)) {
-        setKeys(state => ({ ...state, [event.key]: false }));
+        // setKeys(state => ({ ...state, [event.key]: false }));
+        dispatch({ type: 'up', key: event.key });
       }
     }
 
