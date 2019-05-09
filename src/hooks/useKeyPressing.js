@@ -1,6 +1,7 @@
 import forEach from 'lodash.foreach';
-import { useCallback, useEffect, useReducer, useRef } from 'react';
+import { useCallback, useEffect } from 'react';
 import useAnimationFrame from './useAnimationFrame';
+import useImmutableStateReducer from './useImmutableStateReducer';
 
 function reducer(state, action) {
   switch (action.type) {
@@ -14,14 +15,7 @@ function reducer(state, action) {
 }
 
 export default function useKeyPressing(handlers, { andThen = () => {} }) {
-  const [state, dispatch] = useReducer(reducer, {});
-  const stateRef = useRef(state);
-
-  useEffect(() => {
-    // Capture an immutable reference to the mutable state, so that the callback we pass to `useAnimationFrame`
-    // has a stable reference and doesn't result in it being setup and torn down repeatedly.
-    stateRef.current = state;
-  }, [state])
+  const [stateRef, dispatch] = useImmutableStateReducer(reducer, {});
 
   useAnimationFrame(
     useCallback(
@@ -64,5 +58,5 @@ export default function useKeyPressing(handlers, { andThen = () => {} }) {
       document.removeEventListener('keydown', handleKeyDown);
       document.removeEventListener('keyup', handleKeyUp);
     };
-  }, [handlers]);
+  }, [handlers, dispatch]);
 }
