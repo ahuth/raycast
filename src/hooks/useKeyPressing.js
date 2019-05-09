@@ -35,14 +35,12 @@ export default function useKeyPressing(handlers, { andThen = () => {} }) {
 
     function handleKeyDown(event) {
       if (keyNames.includes(event.key)) {
-        // setKeys(state => ({ ...state, [event.key]: true }));
         dispatch({ type: 'down', key: event.key });
       }
     }
 
     function handleKeyUp(event) {
       if (keyNames.includes(event.key)) {
-        // setKeys(state => ({ ...state, [event.key]: false }));
         dispatch({ type: 'up', key: event.key });
       }
     }
