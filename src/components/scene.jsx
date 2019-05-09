@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import Column from './column';
 
 export default function Scene({
@@ -9,8 +9,10 @@ export default function Scene({
   resolution,
   width,
 }) {
+  const containerStyles = useMemo(() => ({ ...styles.container, height, width }), [height, width]);
+
   return (
-    <div style={{ ...styles.container, height, width }}>
+    <div style={containerStyles}>
       <div style={styles.ceiling} />
       <div style={styles.floor} />
       {rays.map((ray, index) => (
