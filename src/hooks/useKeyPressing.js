@@ -23,19 +23,24 @@ export default function useKeyPressing(handlers, { andThen = () => {} }) {
     stateRef.current = state;
   }, [state])
 
-  useAnimationFrame(useCallback((elapsed) => {
-    let isPressingKey = false;
+  useAnimationFrame(
+    useCallback(
+      (elapsed) => {
+        let isPressingKey = false;
 
-    // Execute the handler for all keys that are being pressed.
-    forEach(handlers, (value, key) => {
-      if (stateRef.current[key]) {
-        isPressingKey = true;
-        value(elapsed);
-      }
-    });
+        // Execute the handler for all keys that are being pressed.
+        forEach(handlers, (value, key) => {
+          if (stateRef.current[key]) {
+            isPressingKey = true;
+            value(elapsed);
+          }
+        });
 
-    if (isPressingKey) { andThen() }
-  }, [stateRef, handlers, andThen]));
+        if (isPressingKey) { andThen() }
+      },
+      [stateRef, handlers, andThen],
+    ),
+  );
 
   useEffect(() => {
     const keyNames = Object.keys(handlers);
