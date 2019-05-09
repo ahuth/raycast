@@ -9,9 +9,7 @@ export default function useCastRays(player, map, fov, resolution) {
     setRays(newRays);
   }, [player, map, fov, resolution]);
 
-  useEffect(() => {
-    castRays();
-  }, [player, map, fov, resolution, castRays]);
+  useEffect(() => { castRays(); }, [castRays]);
 
   useKeyPressing(
     useMemo(
