@@ -1,30 +1,38 @@
 {
   "name": "raycast",
-  "version": "0.1.0",
+  "version": "2.0.0",
+  "private": true,
   "homepage": "https://ahuth.github.io/raycast",
   "license": "MIT",
   "dependencies": {
-    "color": "^3.0.0",
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2"
+    "color": "^3.1.1",
+    "lodash.foreach": "^4.5.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   },
   "devDependencies": {
-    "babel-eslint": "^9.0.0",
-    "eslint": "^5.5.0",
-    "eslint-config-airbnb": "^17.1.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-jsx-a11y": "^6.1.1",
-    "eslint-plugin-react": "^7.11.1",
-    "gh-pages": "^1.2.0",
-    "react-scripts": "^1.1.5"
+    "babel-jest": "24.7.1",
+    "gh-pages": "^2.0.1",
+    "react-scripts": "^3.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "lint": "eslint --ext .jsx --ext .js src"
+    "deploy": "gh-pages -d build"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
