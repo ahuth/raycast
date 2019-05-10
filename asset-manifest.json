@@ -1,6 +1,15 @@
 {
-  "main.css": "static/css/main.0edb0ada.css",
-  "main.css.map": "static/css/main.0edb0ada.css.map",
-  "main.js": "static/js/main.b6a1a72c.js",
-  "main.js.map": "static/js/main.b6a1a72c.js.map"
+  "files": {
+    "main.css": "/raycast/static/css/main.0e5c4964.chunk.css",
+    "main.js": "/raycast/static/js/main.157330bf.chunk.js",
+    "main.js.map": "/raycast/static/js/main.157330bf.chunk.js.map",
+    "runtime~main.js": "/raycast/static/js/runtime~main.10e77c8c.js",
+    "runtime~main.js.map": "/raycast/static/js/runtime~main.10e77c8c.js.map",
+    "static/js/2.5e036b50.chunk.js": "/raycast/static/js/2.5e036b50.chunk.js",
+    "static/js/2.5e036b50.chunk.js.map": "/raycast/static/js/2.5e036b50.chunk.js.map",
+    "index.html": "/raycast/index.html",
+    "precache-manifest.6d96515d0b5a4aa7eaf56f3a28644443.js": "/raycast/precache-manifest.6d96515d0b5a4aa7eaf56f3a28644443.js",
+    "service-worker.js": "/raycast/service-worker.js",
+    "static/css/main.0e5c4964.chunk.css.map": "/raycast/static/css/main.0e5c4964.chunk.css.map"
+  }
 }
