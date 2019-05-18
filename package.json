@@ -17,9 +17,24 @@
   "scripts": {
     "build": "react-scripts build",
     "deploy": "gh-pages -d build",
+    "lint": "eslint --ext .js,.jsx src/",
     "predeploy": "npm run build",
     "start": "react-scripts start",
     "test": "react-scripts test"
+  },
+  "eslintConfig": {
+    "extends": "react-app",
+    "rules": {
+      "comma-dangle": ["error", {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "always-multiline",
+        "exports": "always-multiline",
+        "functions": "always-multiline"
+      }],
+      "semi": ["error", "always"],
+      "quotes": ["error", "single"]
+    }
   },
   "browserslist": {
     "production": [

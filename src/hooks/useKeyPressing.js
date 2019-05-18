@@ -30,7 +30,7 @@ export default function useKeyPressing(handlers, { andThen = () => {} }) {
           }
         });
 
-        if (isPressingKey) { andThen() }
+        if (isPressingKey) { andThen(); }
       },
       [stateRef, handlers, andThen],
     ),
