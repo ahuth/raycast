@@ -4,16 +4,6 @@
   "private": true,
   "homepage": "https://ahuth.github.io/raycast",
   "license": "MIT",
-  "dependencies": {
-    "color": "^3.1.1",
-    "lodash.foreach": "^4.5.0",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6"
-  },
-  "devDependencies": {
-    "gh-pages": "^2.0.1",
-    "react-scripts": "^3.0.1"
-  },
   "scripts": {
     "build": "react-scripts build",
     "deploy": "gh-pages -d build",
@@ -22,6 +12,15 @@
     "start": "react-scripts start",
     "test": "react-scripts test"
   },
+  "dependencies": {
+    "color": "^3.1.2",
+    "lodash.foreach": "^4.5.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  },
+  "devDependencies": {
+    "gh-pages": "^2.1.1",
+    "react-scripts": "^3.2.0"
   },
   "browserslist": [
     ">0.2%",
