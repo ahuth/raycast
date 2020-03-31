@@ -15,10 +15,10 @@ export default function useCastRays(player, map, fov, resolution) {
     useMemo(
       () => {
         return {
-          w: (elapsed) => { player.moveForward(map, elapsed); },
-          s: (elapsed) => { player.moveBackward(map, elapsed); },
-          a: (elapsed) => { player.moveLeft(map, elapsed); },
-          d: (elapsed) => { player.moveRight(map, elapsed); },
+          KeyW: (elapsed) => { player.moveForward(map, elapsed); },
+          KeyS: (elapsed) => { player.moveBackward(map, elapsed); },
+          KeyA: (elapsed) => { player.moveLeft(map, elapsed); },
+          KeyD: (elapsed) => { player.moveRight(map, elapsed); },
           ArrowLeft: (elapsed) => { player.turnLeft(elapsed); },
           ArrowRight: (elapsed) => { player.turnRight(elapsed); },
         };
