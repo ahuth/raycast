@@ -1,5 +1,5 @@
-import Point from './point';
-import Ray from './ray';
+import Point from './Point';
+import Ray from './Ray';
 
 const stepDistance = 1.4; // per 16ms
 const turnRotation = 0.025; // per 16ms
