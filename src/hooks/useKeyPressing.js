@@ -40,16 +40,16 @@ export default function useKeyPressing(handlers, { andThen = () => {} }) {
     const keyNames = Object.keys(handlers);
 
     function handleKeyDown(event) {
-      if (keyNames.includes(event.key)) {
+      if (keyNames.includes(event.code)) {
         event.preventDefault();
-        dispatch({ type: 'down', key: event.key });
+        dispatch({ type: 'down', key: event.code });
       }
     }
 
     function handleKeyUp(event) {
-      if (keyNames.includes(event.key)) {
+      if (keyNames.includes(event.code)) {
         event.preventDefault();
-        dispatch({ type: 'up', key: event.key });
+        dispatch({ type: 'up', key: event.code });
       }
     }
 
