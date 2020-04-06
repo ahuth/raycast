@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import Map from '../utils/map';
+import Map from '../Map';
 import Minimap from './minimap';
-import Player from '../utils/player';
+import Player from '../Player';
 import Scene from './scene';
 import useCastRays from '../hooks/useCastRays';
-import { fromDegrees } from '../utils/radians';
+import { fromDegrees } from '../Radians';
 
 const fov = fromDegrees(60);
 const map = new Map(64);

@@ -1,6 +1,6 @@
 /* eslint-disable no-extend-native */
 
-import Point from './point';
+import Point from './Point';
 
 export default function Map(height) {
   this.height = height;

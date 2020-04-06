@@ -1,5 +1,5 @@
-import Point from './point';
-import { normalize, twoPi } from './radians';
+import Point from './Point';
+import { normalize, twoPi } from './Radians';
 
 export default function Ray(map, angle, origin) {
   this.origin = origin;
