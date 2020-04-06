@@ -1,21 +1,22 @@
 {
   "files": {
     "main.css": "/raycast/static/css/main.0e5c4964.chunk.css",
-    "main.js": "/raycast/static/js/main.41d44904.chunk.js",
-    "main.js.map": "/raycast/static/js/main.41d44904.chunk.js.map",
-    "runtime-main.js": "/raycast/static/js/runtime-main.0dad49fc.js",
-    "runtime-main.js.map": "/raycast/static/js/runtime-main.0dad49fc.js.map",
-    "static/js/2.c302b9e8.chunk.js": "/raycast/static/js/2.c302b9e8.chunk.js",
-    "static/js/2.c302b9e8.chunk.js.map": "/raycast/static/js/2.c302b9e8.chunk.js.map",
+    "main.js": "/raycast/static/js/main.85f564b6.chunk.js",
+    "main.js.map": "/raycast/static/js/main.85f564b6.chunk.js.map",
+    "runtime-main.js": "/raycast/static/js/runtime-main.ae6605b0.js",
+    "runtime-main.js.map": "/raycast/static/js/runtime-main.ae6605b0.js.map",
+    "static/js/2.9bfbcaba.chunk.js": "/raycast/static/js/2.9bfbcaba.chunk.js",
+    "static/js/2.9bfbcaba.chunk.js.map": "/raycast/static/js/2.9bfbcaba.chunk.js.map",
     "index.html": "/raycast/index.html",
-    "precache-manifest.7cf17085212fa0b999d625a0369d3514.js": "/raycast/precache-manifest.7cf17085212fa0b999d625a0369d3514.js",
+    "precache-manifest.7ac1d6a2fc504e05c9eee7f04484125d.js": "/raycast/precache-manifest.7ac1d6a2fc504e05c9eee7f04484125d.js",
     "service-worker.js": "/raycast/service-worker.js",
-    "static/css/main.0e5c4964.chunk.css.map": "/raycast/static/css/main.0e5c4964.chunk.css.map"
+    "static/css/main.0e5c4964.chunk.css.map": "/raycast/static/css/main.0e5c4964.chunk.css.map",
+    "static/js/2.9bfbcaba.chunk.js.LICENSE.txt": "/raycast/static/js/2.9bfbcaba.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.0dad49fc.js",
-    "static/js/2.c302b9e8.chunk.js",
+    "static/js/runtime-main.ae6605b0.js",
+    "static/js/2.9bfbcaba.chunk.js",
     "static/css/main.0e5c4964.chunk.css",
-    "static/js/main.41d44904.chunk.js"
+    "static/js/main.85f564b6.chunk.js"
   ]
 }
