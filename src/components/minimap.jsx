@@ -1,10 +1,10 @@
-import React from 'react';
+import {Component, createRef} from 'react';
 import { twoPi } from '../Radians';
 
-export default class Minimap extends React.Component {
-  wallsRef = React.createRef();
-  playerRef = React.createRef();
-  raysRef = React.createRef();
+export default class Minimap extends Component {
+  wallsRef = createRef();
+  playerRef = createRef();
+  raysRef = createRef();
 
   componentDidMount() {
     this.drawWalls();

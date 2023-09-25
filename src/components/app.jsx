@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Map from '../Map';
 import Minimap from './minimap';
 import Player from '../Player';
