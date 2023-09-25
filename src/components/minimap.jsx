@@ -1,20 +1,14 @@
-import {Component, createRef} from 'react';
+import {useEffect, useRef} from 'react';
 import { twoPi } from '../Radians';
 
-export default class Minimap extends Component {
-  wallsRef = createRef();
-  playerRef = createRef();
-  raysRef = createRef();
+export default function Minimap({map, player, rays, size}) {
+  const wallsRef = useRef();
+  const playerRef = useRef();
+  const raysRef = useRef();
 
-  componentDidMount() {
-    this.drawWalls();
-    this.drawPlayer();
-    this.drawRays();
-  }
-
-  drawWalls() {
-    const context = this.wallsRef.current.getContext('2d');
-    const { map, size } = this.props;
+  // Draw the walls. This should only happen once, since the walls don't move or change.
+  useEffect(() => {
+    const context = wallsRef.current.getContext('2d');
     const cellSize = size / map.size;
 
     context.fillStyle = 'blue';
@@ -26,14 +20,14 @@ export default class Minimap extends Component {
         }
       });
     });
-  }
+  }, [map.grid, map.size, size]);
 
-  drawPlayer() {
-    const context = this.playerRef.current.getContext('2d');
-    const { map, player, size } = this.props;
-    const { position } = player;
-    const gridX = position.x / map.height;
-    const gridY = position.y / map.height;
+  // Draw the player. This should happen when the player moves, but not when they change the
+  // direction they face.
+  useEffect(() => {
+    const context = playerRef.current.getContext('2d');
+    const gridX = player.position.x / map.height;
+    const gridY = player.position.y / map.height;
     const cellSize = size / map.size;
     const minimapX = gridX * cellSize;
     const minimapY = gridY * cellSize;
@@ -43,17 +37,18 @@ export default class Minimap extends Component {
     context.beginPath();
     context.arc(minimapX, minimapY, 5, 0, twoPi);
     context.fill();
-  }
+  }, [map.height, map.size, size, player.position.x, player.position.y]);
 
-  drawRays() {
-    const context = this.raysRef.current.getContext('2d');
-    const { map, rays, size } = this.props;
+  // Draw the rays. This should happen any time the player moves or changes direction.
+  useEffect(() => {
+    const context = raysRef.current.getContext('2d');
     const cellSize = size / map.size;
 
     context.clearRect(0, 0, size, size);
     context.beginPath();
     context.strokeStyle = 'green';
 
+    // Drawing every ray is kind of slow and pointless. Instead draw every 20 (which is every 16th).
     for (let i = 0; i < rays.length; i += 16) {
       const { angle, distance, origin } = rays[i];
       const gridX = origin.x / map.height;
@@ -67,23 +62,13 @@ export default class Minimap extends Component {
       context.lineTo(minimapX + mapDistance * Math.cos(angle), minimapY + mapDistance * -Math.sin(angle));
       context.stroke();
     }
-  }
+  }, [map.height, map.size, size, rays]);
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.rays !== this.props.rays) {
-      this.drawPlayer();
-      this.drawRays();
-    }
-  }
-
-  render() {
-    const { size } = this.props;
-    return (
-      <div className="relative">
-        <canvas className="absolute top-0 left-0" ref={this.wallsRef} height={size} width={size} />
-        <canvas className="absolute top-0 left-0" ref={this.playerRef} height={size} width={size} />
-        <canvas className="absolute top-0 left-0" ref={this.raysRef} height={size} width={size} />
-      </div>
-    );
-  }
+  return (
+    <div className="relative">
+      <canvas className="absolute top-0 left-0" ref={wallsRef} height={size} width={size} />
+      <canvas className="absolute top-0 left-0" ref={playerRef} height={size} width={size} />
+      <canvas className="absolute top-0 left-0" ref={raysRef} height={size} width={size} />
+    </div>
+  );
 }
