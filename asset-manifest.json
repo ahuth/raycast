@@ -1,22 +1,13 @@
 {
   "files": {
-    "main.css": "/raycast/static/css/main.0e5c4964.chunk.css",
-    "main.js": "/raycast/static/js/main.85f564b6.chunk.js",
-    "main.js.map": "/raycast/static/js/main.85f564b6.chunk.js.map",
-    "runtime-main.js": "/raycast/static/js/runtime-main.ae6605b0.js",
-    "runtime-main.js.map": "/raycast/static/js/runtime-main.ae6605b0.js.map",
-    "static/js/2.9bfbcaba.chunk.js": "/raycast/static/js/2.9bfbcaba.chunk.js",
-    "static/js/2.9bfbcaba.chunk.js.map": "/raycast/static/js/2.9bfbcaba.chunk.js.map",
+    "main.css": "/raycast/static/css/main.0f318bdb.css",
+    "main.js": "/raycast/static/js/main.aa61ef33.js",
     "index.html": "/raycast/index.html",
-    "precache-manifest.7ac1d6a2fc504e05c9eee7f04484125d.js": "/raycast/precache-manifest.7ac1d6a2fc504e05c9eee7f04484125d.js",
-    "service-worker.js": "/raycast/service-worker.js",
-    "static/css/main.0e5c4964.chunk.css.map": "/raycast/static/css/main.0e5c4964.chunk.css.map",
-    "static/js/2.9bfbcaba.chunk.js.LICENSE.txt": "/raycast/static/js/2.9bfbcaba.chunk.js.LICENSE.txt"
+    "main.0f318bdb.css.map": "/raycast/static/css/main.0f318bdb.css.map",
+    "main.aa61ef33.js.map": "/raycast/static/js/main.aa61ef33.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.ae6605b0.js",
-    "static/js/2.9bfbcaba.chunk.js",
-    "static/css/main.0e5c4964.chunk.css",
-    "static/js/main.85f564b6.chunk.js"
+    "static/css/main.0f318bdb.css",
+    "static/js/main.aa61ef33.js"
   ]
 }
