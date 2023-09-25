@@ -13,14 +13,14 @@
     "test": "react-scripts test"
   },
   "dependencies": {
-    "color": "^3.1.2",
+    "color": "^4.2.3",
     "lodash.foreach": "^4.5.0",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "gh-pages": "^2.2.0",
-    "react-scripts": "^3.4.1"
+    "gh-pages": "^6.0.0",
+    "react-scripts": "^5.0.1"
   },
   "browserslist": [
     ">0.2%",
