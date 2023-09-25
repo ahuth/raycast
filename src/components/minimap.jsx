@@ -79,22 +79,11 @@ export default class Minimap extends Component {
   render() {
     const { size } = this.props;
     return (
-      <div style={styles.container}>
-        <canvas ref={this.wallsRef} height={size} width={size} style={styles.layer} />
-        <canvas ref={this.playerRef} height={size} width={size} style={styles.layer} />
-        <canvas ref={this.raysRef} height={size} width={size} style={styles.layer} />
+      <div className="relative">
+        <canvas className="absolute top-0 left-0" ref={this.wallsRef} height={size} width={size} />
+        <canvas className="absolute top-0 left-0" ref={this.playerRef} height={size} width={size} />
+        <canvas className="absolute top-0 left-0" ref={this.raysRef} height={size} width={size} />
       </div>
     );
   }
 }
-
-const styles = {
-  container: {
-    position: 'relative',
-  },
-  layer: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-  },
-};

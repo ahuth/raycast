@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import Column from './column';
+import styles from './scene.module.css';
 
 export default function Scene({
   height,
@@ -9,12 +10,12 @@ export default function Scene({
   resolution,
   width,
 }) {
-  const containerStyles = useMemo(() => ({ ...styles.container, height, width }), [height, width]);
+  const containerSize = useMemo(() => ({ height, width }), [height, width]);
 
   return (
-    <div style={containerStyles}>
-      <div style={styles.ceiling} />
-      <div style={styles.floor} />
+    <div className={styles.container} style={containerSize}>
+      <div className={styles.ceiling} />
+      <div className={styles.floor} />
       {rays.map((ray, index) => (
         <Column
           color="#0000FF"
@@ -35,26 +36,3 @@ export default function Scene({
 function adjustDistance(ray, player) {
   return ray.distance * Math.cos(ray.angle - player.direction);
 }
-
-const styles = {
-  container: {
-    border: '1px solid black',
-    position: 'relative',
-  },
-  ceiling: {
-    backgroundColor: 'SlateGrey',
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: '50%',
-    top: 0,
-  },
-  floor: {
-    backgroundColor: 'Gainsboro',
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: 0,
-    top: '50%',
-  },
-};

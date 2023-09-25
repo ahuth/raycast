@@ -16,7 +16,7 @@ export default function App() {
   const rays = useCastRays(player, map, fov, resolution);
 
   return (
-    <div style={styles.container}>
+    <div className="flex">
       <div>
         <Scene
           height={400}
@@ -50,9 +50,3 @@ export default function App() {
     </div>
   );
 }
-
-const styles = {
-  container: {
-    display: 'flex',
-  },
-};

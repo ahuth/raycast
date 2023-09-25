@@ -1,0 +1,22 @@
+.container {
+  border: 1px solid black;
+  position: relative;
+}
+
+.ceiling {
+  background-color: SlateGrey;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 50%;
+  top: 0;
+}
+
+.floor {
+  background-color: Gainsboro;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 50%;
+}
