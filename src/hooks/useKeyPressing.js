@@ -17,17 +17,17 @@ export default function useKeyPressing(handlers, { andThen = () => {} }) {
   const [state, dispatch] = useReducer(reducer, {});
 
   useAnimationFrame((elapsed) => {
-    let isPressingKey = false;
+    let isPressingAnyKey = false;
 
     // Execute the handler for all keys that are being pressed.
     forEach(handlers, (value, key) => {
       if (state[key]) {
-        isPressingKey = true;
+        isPressingAnyKey = true;
         value(elapsed);
       }
     });
 
-    if (isPressingKey) { andThen(); }
+    if (isPressingAnyKey) { andThen(); }
   });
 
   useEffect(() => {
