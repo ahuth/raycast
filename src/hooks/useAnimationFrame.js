@@ -1,21 +1,25 @@
 import { useEffect, useRef } from 'react';
 
 export default function useAnimationFrame(callback) {
-  const frameRef = useRef();
-  const timestampRef = useRef();
+  const callbackRef = useRef(callback);
 
+  // Get a stable reference to the callback, so that users don't need to memoize it themselves.
   useEffect(() => {
-    timestampRef.current = window.performance.now();
-  }, []);
+    callbackRef.current = callback;
+  }, [callback]);
 
+  // Setup a loop of animation frames and pass the elapsed time for each to the callback.
   useEffect(() => {
+    let prevTimestamp = window.performance.now();
+
     function loop(timestamp) {
-      frameRef.current = requestAnimationFrame(loop);
-      callback(timestamp - timestampRef.current);
-      timestampRef.current = timestamp;
+      callbackRef.current(timestamp - prevTimestamp);
+      prevTimestamp = timestamp;
+      frameId = requestAnimationFrame(loop);
     };
 
-    frameRef.current = requestAnimationFrame(loop);
-    return () => cancelAnimationFrame(frameRef.current);
-  }, [callback]);
+    let frameId = requestAnimationFrame(loop);
+
+    return () => cancelAnimationFrame(frameId);
+  }, []);
 };

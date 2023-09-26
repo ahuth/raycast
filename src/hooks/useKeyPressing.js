@@ -1,5 +1,5 @@
 import forEach from 'lodash.foreach';
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 import useAnimationFrame from './useAnimationFrame';
 import useImmutableStateReducer from './useImmutableStateReducer';
 
@@ -17,24 +17,19 @@ function reducer(state, action) {
 export default function useKeyPressing(handlers, { andThen = () => {} }) {
   const [stateRef, dispatch] = useImmutableStateReducer(reducer, {});
 
-  useAnimationFrame(
-    useCallback(
-      (elapsed) => {
-        let isPressingKey = false;
+  useAnimationFrame((elapsed) => {
+    let isPressingKey = false;
 
-        // Execute the handler for all keys that are being pressed.
-        forEach(handlers, (value, key) => {
-          if (stateRef.current[key]) {
-            isPressingKey = true;
-            value(elapsed);
-          }
-        });
+    // Execute the handler for all keys that are being pressed.
+    forEach(handlers, (value, key) => {
+      if (stateRef.current[key]) {
+        isPressingKey = true;
+        value(elapsed);
+      }
+    });
 
-        if (isPressingKey) { andThen(); }
-      },
-      [stateRef, handlers, andThen],
-    ),
-  );
+    if (isPressingKey) { andThen(); }
+  });
 
   useEffect(() => {
     const keyNames = Object.keys(handlers);
