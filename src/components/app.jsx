@@ -31,8 +31,8 @@ export default function App() {
           <div>
             <label htmlFor="show_minimap">
               Show minimap
-              <input id="show_minimap" onChange={() => setShowMinimap(!showMinimap)} type="checkbox" checked={showMinimap} />
             </label>
+            <input id="show_minimap" onChange={() => setShowMinimap(!showMinimap)} type="checkbox" checked={showMinimap} />
           </div>
           <a href="https://github.com/ahuth/raycast">Source code</a>
         </div>
