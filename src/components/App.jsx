@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import Map from '../Map';
-import Minimap from './minimap';
+import Minimap from './Minimap';
 import Player from '../Player';
-import Scene from './scene';
+import Scene from './Scene';
 import useCastRays from '../hooks/useCastRays';
 import { fromDegrees } from '../Radians';
 

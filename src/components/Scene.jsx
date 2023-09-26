@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
-import Column from './column';
-import styles from './scene.module.css';
+import Column from './Column';
+import styles from './Scene.module.css';
 
 export default function Scene({
   height,
