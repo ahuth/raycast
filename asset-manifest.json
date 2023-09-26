@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/raycast/static/css/main.0f318bdb.css",
-    "main.js": "/raycast/static/js/main.aa61ef33.js",
+    "main.css": "/raycast/static/css/main.893e7216.css",
+    "main.js": "/raycast/static/js/main.05ce38ad.js",
     "index.html": "/raycast/index.html",
-    "main.0f318bdb.css.map": "/raycast/static/css/main.0f318bdb.css.map",
-    "main.aa61ef33.js.map": "/raycast/static/js/main.aa61ef33.js.map"
+    "main.893e7216.css.map": "/raycast/static/css/main.893e7216.css.map",
+    "main.05ce38ad.js.map": "/raycast/static/js/main.05ce38ad.js.map"
   },
   "entrypoints": [
-    "static/css/main.0f318bdb.css",
-    "static/js/main.aa61ef33.js"
+    "static/css/main.893e7216.css",
+    "static/js/main.05ce38ad.js"
   ]
 }
