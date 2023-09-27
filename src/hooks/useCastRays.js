@@ -9,8 +9,12 @@ export default function useCastRays(player, map, fov, resolution) {
     setRays(newRays);
   }, [player, map, fov, resolution]);
 
-  useEffect(() => { castRays(); }, [castRays]);
+  // Cast an initial set of rays on initial render, so we have something to show.
+  useEffect(() => {
+    castRays();
+  }, [castRays]);
 
+  // Move the player around the map when certain keys are pressed, and then re-cast the rays.
   useKeyPressing({
     handlers: useMemo(
       () => {
