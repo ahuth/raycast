@@ -1,20 +1,9 @@
 import forEach from 'lodash.foreach';
-import { useEffect, useReducer } from 'react';
+import { useEffect, useRef } from 'react';
 import useAnimationFrame from './useAnimationFrame';
 
-function reducer(state, action) {
-  switch (action.type) {
-    case 'down':
-      return { ...state, [action.key]: true };
-    case 'up':
-      return { ...state, [action.key]: false };
-    default:
-      return state;
-  }
-}
-
 export default function useKeyPressing(handlers, { andThen = () => {} }) {
-  const [state, dispatch] = useReducer(reducer, {});
+  const pressedKeys = useRef(new Set());
 
   // Track which keys are pressed.
   useEffect(() => {
@@ -23,14 +12,14 @@ export default function useKeyPressing(handlers, { andThen = () => {} }) {
     function handleKeyDown(event) {
       if (keyNames.includes(event.code)) {
         event.preventDefault();
-        dispatch({ type: 'down', key: event.code });
+        pressedKeys.current.add(event.code);
       }
     }
 
     function handleKeyUp(event) {
       if (keyNames.includes(event.code)) {
         event.preventDefault();
-        dispatch({ type: 'up', key: event.code });
+        pressedKeys.current.delete(event.code);
       }
     }
 
@@ -41,7 +30,7 @@ export default function useKeyPressing(handlers, { andThen = () => {} }) {
       document.removeEventListener('keydown', handleKeyDown);
       document.removeEventListener('keyup', handleKeyUp);
     };
-  }, [handlers, dispatch]);
+  }, [handlers]);
 
   // Every animation frame execute the handlers associated with all keys that are currently being
   // pressed.
@@ -49,7 +38,7 @@ export default function useKeyPressing(handlers, { andThen = () => {} }) {
     let isPressingAnyKey = false;
 
     forEach(handlers, (value, key) => {
-      if (state[key]) {
+      if (pressedKeys.current.has(key)) {
         isPressingAnyKey = true;
         value(elapsed);
       }
