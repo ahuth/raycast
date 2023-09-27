@@ -1,4 +1,3 @@
-import forEach from 'lodash.foreach';
 import { useEffect, useRef } from 'react';
 import useAnimationFrame from './useAnimationFrame';
 
@@ -37,12 +36,14 @@ export default function useKeyPressing(handlers, { andThen = () => {} }) {
   useAnimationFrame((elapsed) => {
     let isPressingAnyKey = false;
 
-    forEach(handlers, (value, key) => {
+    for (let key in handlers) {
+      const callback = handlers[key];
+
       if (pressedKeys.current.has(key)) {
         isPressingAnyKey = true;
-        value(elapsed);
+        callback(elapsed);
       }
-    });
+    }
 
     if (isPressingAnyKey) { andThen(); }
   });
