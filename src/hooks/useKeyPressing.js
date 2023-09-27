@@ -31,20 +31,21 @@ export default function useKeyPressing(handlers, { andThen = () => {} }) {
     };
   }, [handlers]);
 
-  // Every animation frame execute the handlers associated with all keys that are currently being
+  // Every animation frame, execute the handlers associated with all keys that are currently being
   // pressed.
   useAnimationFrame((elapsed) => {
-    let isPressingAnyKey = false;
-
+    // Execute the handlers for any keys that are pressed.
     for (let key in handlers) {
       const callback = handlers[key];
 
       if (pressedKeys.current.has(key)) {
-        isPressingAnyKey = true;
         callback(elapsed);
       }
     }
 
-    if (isPressingAnyKey) { andThen(); }
+    // If any keys are pressed, also execute the final callback once.
+    if (pressedKeys.current.size > 0) {
+      andThen();
+    }
   });
 }
