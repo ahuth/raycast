@@ -11,8 +11,8 @@ export default function useCastRays(player, map, fov, resolution) {
 
   useEffect(() => { castRays(); }, [castRays]);
 
-  useKeyPressing(
-    useMemo(
+  useKeyPressing({
+    handlers: useMemo(
       () => {
         return {
           KeyW: (elapsed) => { player.moveForward(map, elapsed); },
@@ -25,8 +25,8 @@ export default function useCastRays(player, map, fov, resolution) {
       },
       [player, map],
     ),
-    { andThen: castRays },
-  );
+    andThen: castRays,
+  });
 
   return rays;
 }

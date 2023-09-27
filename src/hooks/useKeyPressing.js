@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import useAnimationFrame from './useAnimationFrame';
 
-export default function useKeyPressing(handlers, { andThen = () => {} }) {
+export default function useKeyPressing({ handlers, andThen = () => {} }) {
   const pressedKeys = useRef(new Set());
 
   // Track which keys are pressed.
