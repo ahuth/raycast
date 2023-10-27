@@ -35,12 +35,9 @@ export default function useKeyPressing({ handlers, andThen = () => {} }) {
   // pressed.
   useAnimationFrame((elapsed) => {
     // Execute the handlers for any keys that are pressed.
-    for (let key in handlers) {
+    for (let key of pressedKeys.current) {
       const callback = handlers[key];
-
-      if (pressedKeys.current.has(key)) {
-        callback(elapsed);
-      }
+      callback(elapsed);
     }
 
     // If any keys are pressed, also execute the final callback once.
